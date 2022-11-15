@@ -1,3 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.container {
+  max-width: 500px;
+  margin: 30px auto;
+  overflow: auto;
+  min-height: 300px;
+  border: 1px solid black;
+  padding: 30px;
+  border-radius: 5px;
+}
+
+.section {
+  padding: 30px;
+}
+
+.vertical-center {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+}
+
+.site-title {
+  font-size: 2rem;
+}
+
+#reservation {
+ padding-bottom: 20px;
+}
+
+/* NavBar */
 .nav {
   background-color: #333;
   color: white;
@@ -7,10 +49,6 @@
   gap: 2 rem;
   padding: 0 1rem;
 
-}
-
-.site-title {
-  font-size: 2rem;
 }
 
 .nav ul {
@@ -38,35 +76,28 @@
   background-color: #555;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* Icons */
+.react-icons {
+  vertical-align: middle;
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
+/* Containers */
+.center {
+  text-align: center;
 }
 
-.container {
-  max-width: 500px;
-  margin: 30px auto;
-  overflow: auto;
-  min-height: 300px;
-  border: 1px solid steelblue;
-  padding: 30px;
-  border-radius: 5px;
+.center-inline{
+  height: 200px;
+  position: relative;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+.divider{
+  width:4px;
+  height:auto;
+  display:inline-block;
 }
 
+/* Buttons */
 .btn {
   display: inline-block;
   background: #000;
@@ -94,23 +125,7 @@ body {
   width: 100%;
 }
 
-.task {
-  background: #f4f4f4;
-  margin: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.task.reminder {
-  border-left: 5px solid green;
-}
-
-.task h3 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
+/* Form control */
 .add-form {
   margin-bottom: 40px;
 }
@@ -149,4 +164,11 @@ body {
 footer {
   margin-top: 30px;
   text-align: center;
+}
+
+/* UX */
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
