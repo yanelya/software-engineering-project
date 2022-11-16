@@ -10,23 +10,73 @@ const Reservation = () => {
   const [cdate, setcDate] = useState(currentdate)
   const [times, setTimes] = useState([])
   const [reserve, setReserve] = useState(false)
+  const [data, setData] = useState([])
   const endpoint = 'http://localhost:4000/app/reservations'
   const dataFetchedRef = useRef(false);
   const displayTimes = ['8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM',
     '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM',
     '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM']
 
+  //-------------------- Get Request --------------------
+  function getRequest () {
+    axios.get(endpoint, {})
+    .then(res => {
+      const resdata = res.data
+      setData(resdata)
+      //--------------- for rendering the first day -------------
+      if(cdate === currentdate)
+        renderTimeSlots(resdata)
+    })
+    .catch((error) =>
+        console.log('Error sending data:', error)
+  )}
+
+  //--------------------calls api once at render------------------------------
+  useEffect(() => {
+    if (dataFetchedRef.current) 
+      return;
+    dataFetchedRef.current = true
+    getRequest()
+  })
+
+  function formatTimes(reservedTimes){
+    const arr = displayTimes.filter(i => !reservedTimes.includes(i))
+    let timeRows = []
+    let tempRow = []
+
+    let count = 0
+    for(let i = 0; i < arr.length; i++){
+      count++
+      tempRow.push(arr[i])
+      if((count === 3)){
+        timeRows.push(tempRow)
+        tempRow = []
+        count = 0
+      }
+      if(i === arr.length - 1 && count > 0)
+        timeRows.push(tempRow)
+    }
+    return timeRows
+  }
+
+  function renderTimeSlots(resdata){
+    const currentDay = resdata.filter(({date}) => date === cdate)
+    const reservedTimes = currentDay.map(value => value.time)
+    const timeSlots = formatTimes(reservedTimes)
+    setTimes(timeSlots)
+  }
+  
   function nextDate () {
     current.setDate(current.getDate() + days)
     currentdate = current.toDateString()
 
     setDays(days + 1)
-
-    console.log('setting date to: ', currentdate)
     setcDate(currentdate)
-    console.log('date set to: ', cdate)
-
-    //getRequest()
+  
+    const currentDay = data.filter(({date}) => date === currentdate)
+    const reservedTimes = currentDay.map(value => value.time)
+    const timeSlots = formatTimes(reservedTimes)
+    setTimes(timeSlots)
   }
 
   function previousDate () {
@@ -36,65 +86,22 @@ const Reservation = () => {
     setDays(days - 1)
     setcDate(currentdate)
 
+    const currentDay = data.filter(({date}) => date === currentdate)
+    const reservedTimes = currentDay.map(value => value.time)
+    const timeSlots = formatTimes(reservedTimes)
+    setTimes(timeSlots)
   } 
 
-  function getRequest () {
-    axios.get(endpoint, {})
-    .then(res => {
-      //GRAB DATA------------------------------------------------------------------------- working
-      const data = res.data
-      //console.log("data: ", data)
+  const displayTimeSlots = times.map((ele, i) => {
+    return(
+      <div className='center' key={i}>
+        {ele[0] && <button type="button" className="btn btn-outline-dark" >{ele[0]}</button>}
+        {ele[1] && <button type="button" className="btn btn-outline-dark" >{ele[1]}</button>}
+        {ele[2] && <button type="button" className="btn btn-outline-dark" >{ele[2]}</button>}
+      </div>
+    )
+  })
 
-      //GRAB DATE------------------------------------------------------------------------- working
-      const currentDay = data.filter(({date}) => date === cdate)
-      //console.log("current date: ", cdate)
-      console.log("Customers with Reservations on", cdate, currentDay)
-
-      //GRAB TIME------------------------------------------------------------------------- working
-      const reservedTimes = currentDay.map(value => value.time)
-      //console.log('reservered times: ', reservedTimes)
-  
-      const filteredTimes = displayTimes.filter(i => !reservedTimes.includes(i))
-      let timeRows = []
-      let tempRow = []
-
-      let count = 0
-      for(let i = 0; i < filteredTimes.length; i++){
-        count++
-        tempRow.push(filteredTimes[i])
-        if((count === 3)){
-          timeRows.push(tempRow)
-          tempRow = []
-          count = 0
-        }
-        if(i === filteredTimes.length - 1 && count > 0)
-          timeRows.push(tempRow)
-      }
-
-      setTimes(timeRows)
-      //console.log("times: ", timeRows)
-    })
-    .catch((error) =>
-        console.log('Error sending data:', error))
-    }
-    
-    useEffect(() => {
-      if (dataFetchedRef.current) 
-        return;
-      dataFetchedRef.current = true;
-      getRequest();
-    })
-    
-    const arr = times.map((ele, i) => {
-      return(
-        <div className='center' key={i}>
-          {ele[0] && <button type="button" className="btn btn-outline-dark" >{ele[0]}</button>}
-          {ele[1] && <button type="button" className="btn btn-outline-dark" >{ele[1]}</button>}
-          {ele[2] && <button type="button" className="btn btn-outline-dark" >{ele[2]}</button>}
-        </div>
-      )
-    })
-    
   return (
     <div className="prevent-select">
       <h1 id='reservation'>Reservation</h1>
@@ -104,10 +111,10 @@ const Reservation = () => {
           <div className='center'>
             <BsFillArrowLeftCircleFill onClick={() => days !== 1 ? previousDate() : '' } style={{cursor:'pointer'}} />
             {`${' '}${cdate}${' '}`}
-            <BsFillArrowRightCircleFill onClick={() => {nextDate(); getRequest(); }} style={{cursor:'pointer'}}/>
+            <BsFillArrowRightCircleFill onClick={() => {nextDate();}} style={{cursor:'pointer'}}/>
           </div>
           <div className='section'>
-            {arr}
+            {displayTimeSlots}
           </div>
         </div>
       }
