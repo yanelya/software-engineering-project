@@ -6,12 +6,17 @@ const RegisterForm = () => {
   const [lastName, setLastName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
+  const [address, setAddress] = useState('')
+  const [showBilling, setShowBilling] = useState(false)
+  const [billingAddress, setBillingAddress] = useState('')
+  const [paymentMethod, setPaymentMethod] = useState('')
+  const [password, setPassword] = useState('')
 
   const onSubmit = (e) => {
     e.preventDefault()
 
-    if(!firstName || !lastName || !phone || !email){
-      alert('Missing field')
+    if(!firstName || !lastName || !phone || !email || !address|| !password || (showBilling === true && !billingAddress)){
+      alert('Missing fields')
       return
     }
 
@@ -19,7 +24,11 @@ const RegisterForm = () => {
       first: firstName,
       last: lastName,
       phone: phone,
-      email: email
+      email: email,
+      billing_address: billingAddress,
+      mailing_address: address,
+      payment_method: paymentMethod,
+      password: password
     }
 
     axios.post('http://localhost:4000/app/customers', registered)
@@ -32,6 +41,11 @@ const RegisterForm = () => {
     setLastName('')
     setPhone('')
     setEmail('')
+    setAddress('')
+    setShowBilling(false)
+    setBillingAddress('')
+    setPaymentMethod('')
+    setPassword('')
   }
 
   
@@ -55,6 +69,39 @@ const RegisterForm = () => {
       <div className='form-control'>
         <label>Email</label>
         <input type='text' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
+      </div>
+
+      <div className='form-control'>
+        <label>Address</label>
+        <input type='text' placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)}/>
+      </div>
+          
+      <div className='center'>
+        <input name="billing" type='checkbox' onChange={() => setShowBilling((prev) => !prev)}/>
+        <label htmlFor="billing"> Billing address is different as mailing address</label>
+      </div>
+
+      {showBilling &&
+
+      <div className='form-control'>
+        <label>Billing Address</label>
+        <input type='text' placeholder='Billing Address' value={billingAddress} onChange={(e) => setBillingAddress(e.target.value)}/>
+      </div>
+
+      }
+
+      <div className='form-control'>
+        <label htmlFor="payment">Choose preferred payment method:</label>
+        <select name="payment" onChange={(e) => setPaymentMethod(e.target.value)}>
+          <option value={"Card"}>Card</option>
+          <option value="Cash">Cash</option>
+          <option value="Check">Check</option>
+        </select >
+      </div>
+
+      <div className='form-control'>
+        <label>Password</label>
+        <input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}/>
       </div>
 
       <input type='submit' value='Submit' className='btn btn-block'/>

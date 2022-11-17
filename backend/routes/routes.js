@@ -9,7 +9,13 @@ router.post('/customers', (req, res) => {
         first: req.body.first,
         last: req.body.last,
         phone: req.body.phone,
-        email: req.body.email
+        email: req.body.email,
+        billing_address: req.body.billing_address,
+        mailing_address: req.body.mailing_address,
+        password: req.body.password,
+        payment_method: req.body.payment_method,
+        points: 0,
+        preferred_diner: 0
     })
     
     newCustomer.save()

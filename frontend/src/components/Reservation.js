@@ -1,7 +1,9 @@
 import React from 'react'
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { useState, useEffect, useRef } from 'react'
+import GuestForm from './GuestForm';
 import axios from 'axios'
+import {CustomLink} from './Navbar'
 
 const Reservation = () => {
   let current = new Date()
@@ -11,6 +13,7 @@ const Reservation = () => {
   const [times, setTimes] = useState([])
   const [reserve, setReserve] = useState(false)
   const [data, setData] = useState([])
+  const [dateChosen, setDateChosen] = useState(false)
   const endpoint = 'http://localhost:4000/app/reservations'
   const dataFetchedRef = useRef(false);
   const displayTimes = ['8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM',
@@ -92,21 +95,43 @@ const Reservation = () => {
     setTimes(timeSlots)
   } 
 
+  function handleTimeSelection(dayChosen) {
+    setDateChosen(true)
+    setDateChosen(dayChosen)
+  }
+
   const displayTimeSlots = times.map((ele, i) => {
     return(
       <div className='center' key={i}>
-        {ele[0] && <button type="button" className="btn btn-outline-dark" >{ele[0]}</button>}
-        {ele[1] && <button type="button" className="btn btn-outline-dark" >{ele[1]}</button>}
-        {ele[2] && <button type="button" className="btn btn-outline-dark" >{ele[2]}</button>}
+        {ele[0] && <button type="button" className="btn" value={ele[0]} onClick={() => handleTimeSelection(ele[0])}>{ele[0]}</button>}
+        {ele[1] && <button type="button" className="btn" value={ele[1]} onClick={() => handleTimeSelection(ele[1])}>{ele[1]}</button>}
+        {ele[2] && <button type="button" className="btn" value={ele[2]} onClick={() => handleTimeSelection(ele[2])}>{ele[2]}</button>}
       </div>
     )
   })
 
+  function handleChooseNewDate(){
+    
+  }
+
+  const handleReservation = (e) => {
+/*
+    const reservation = {
+      first: firstName,
+      last: lastName,
+      phone: phone,
+      email: email,
+      date: date,
+      time: time,
+      guests: guests
+    }*/
+  }
+
   return (
     <div className="prevent-select">
-      <h1 id='reservation'>Reservation</h1>
+      <h1 className='sub-header'>Reservation</h1>
 
-      {reserve && 
+      {reserve && !dateChosen && 
         <div>
           <div className='center'>
             <BsFillArrowLeftCircleFill onClick={() => days !== 1 ? previousDate() : '' } style={{cursor:'pointer'}} />
@@ -114,14 +139,33 @@ const Reservation = () => {
             <BsFillArrowRightCircleFill onClick={() => {nextDate();}} style={{cursor:'pointer'}}/>
           </div>
           <div className='section'>
+            <p className='center'> Available times below</p><br></br>
             {displayTimeSlots}
           </div>
         </div>
       }
 
-      {reserve === false && 
-       <div className='center'>
-          <button type="button" className="btn btn-outline-dark" onClick={() => setReserve(true)}>Make a Reservation</button>
+      {!reserve && !dateChosen &&
+        <div className='center'>
+          <br></br>
+          <button type="button" className="btn" style={{background:'#000', color: '#fff'}} onClick={() => setReserve(true)}>Make a Reservation</button>
+        </div>
+      }
+
+      {dateChosen && 
+        <div>
+          <p>Date: {cdate}</p>
+          <p>Time: {dateChosen}</p><br></br>
+          <div className='center'>
+            <p className='mock-link' onClick={() => setDateChosen(false)}>Select different time or date</p>
+          </div>
+          <GuestForm />
+          <hr></hr><br></br>
+          <div className='center'>
+            <div className='transparent'>
+              <CustomLink to='/Login'>Or login here</CustomLink>
+            </div>
+          </div>
         </div>
       }
       
