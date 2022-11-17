@@ -162,9 +162,7 @@ const Reservation = () => {
           <GuestForm />
           <hr></hr><br></br>
           <div className='center'>
-            <div className='transparent'>
-              <CustomLink to='/Login'>Or login here</CustomLink>
-            </div>
+            <CustomLink to='/Login'>Or login here</CustomLink>
           </div>
         </div>
       }
