@@ -38,6 +38,7 @@ const customerTemplate = new mongoose.Schema({
     preferred_diner: {
         type: Number
     }
+    
 })
 
 export default mongoose.model('customers', customerTemplate)

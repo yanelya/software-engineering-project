@@ -48,6 +48,14 @@ body {
   text-decoration: underline;
 }
 
+.sub-container {
+  background: #fff8e7;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
 /* NavBar */
 .nav {
   background-color: #333;

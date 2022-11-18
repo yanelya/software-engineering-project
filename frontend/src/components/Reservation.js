@@ -154,9 +154,12 @@ const Reservation = () => {
 
       {dateChosen && 
         <div>
-          <p>Date: {cdate}</p>
-          <p>Time: {dateChosen}</p><br></br>
+          <div className='sub-container'>
+            <p>Date: {cdate}</p>
+            <p>Time: {dateChosen}</p>
+          </div>
           <div className='center'>
+            <br></br>
             <p className='mock-link' onClick={() => setDateChosen(false)}>Select different time or date</p>
           </div>
           <GuestForm />
