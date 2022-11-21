@@ -6,11 +6,12 @@ const GuestForm = () => {
     const [lastName, setLastName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
+    const [numOfguest, setNumOfguest] = useState('')
 
     const onSubmit = (e) => {
         e.preventDefault()
 
-        if(!firstName || !lastName || !phone || !email){
+        if(!firstName || !lastName || !phone || !email || !numOfguest){
             alert('Missing field')
             return
           }
@@ -19,7 +20,8 @@ const GuestForm = () => {
             first: firstName,
             last: lastName,
             phone: phone,
-            email: email
+            email: email,
+            numOfguest: numOfguest
           }
     } 
 
@@ -43,6 +45,11 @@ const GuestForm = () => {
       <div className='form-control'>
         <label>Email</label>
         <input type='text' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
+      </div>
+
+      <div className='form-control'>
+        <label>Number of Guests</label>
+        <input type='text' placeholder='Number of Guests' value={numOfguest} onChange={(e) => setNumOfguest(e.target.value)}/>
       </div>
     </form>
   )
