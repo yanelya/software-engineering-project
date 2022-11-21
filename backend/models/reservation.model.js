@@ -17,6 +17,10 @@ const reservationTemplate = new mongoose.Schema({
         type: String,
         required: true
     },
+    numOfguest:{
+        type: Number,
+        required: true
+    },
     date: {
         type: String,
         required: true
