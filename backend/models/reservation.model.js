@@ -25,7 +25,7 @@ const reservationTemplate = new mongoose.Schema({
         type: String,
         required: true
     },
-    guest: {
+    guests: {
         type: String,
         required: true
     }

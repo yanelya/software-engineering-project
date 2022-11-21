@@ -26,6 +26,7 @@ router.post('/customers', (req, res) => {
     .catch(error => {
         res.json(error)
         console.log("Error saving response")
+        return error.response;
     })
 })
 
@@ -61,6 +62,7 @@ router.get('/reservations', (request, response) => {
     .catch(error => {
         response.json(error)
         console.log('Error getting reservations')
+        return error.response;
     })
 })
 

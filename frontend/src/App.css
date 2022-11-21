@@ -55,6 +55,13 @@ body {
   margin: 5px;
   border-radius: 5px;
 }
+.react-datepicker__input-container input {
+  border: solid;
+  text-align: center;
+  font-size: medium;
+  height: 50px;
+  width: 50%;
+}
 
 /* NavBar */
 .nav {
