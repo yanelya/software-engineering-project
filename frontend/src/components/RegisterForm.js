@@ -15,8 +15,12 @@ const RegisterForm = () => {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    if(!firstName || !lastName || !phone || !email || !address|| !password || (showBilling === true && !billingAddress)){
+    if(!firstName || !lastName || !phone || !email || !address|| !password|| (showBilling === true && !billingAddress)){
       alert('Missing fields')
+      return
+    }
+    if(!paymentMethod){
+      alert('Enter preferred payment method')
       return
     }
 

@@ -1,15 +1,17 @@
 import React from 'react'
-import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from "react-icons/bs";
+import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from "react-icons/bs"
 import { useState, useEffect, useRef } from 'react'
-import GuestForm from './GuestForm';
+import GuestForm from './GuestForm'
 import axios from 'axios'
 import {CustomLink} from './Navbar'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
 
 const Reservation = () => {
   let current = new Date()
   let currentdate = current.toDateString()
   const [days, setDays] = useState(1)
-  const [cdate, setcDate] = useState(currentdate)
+  const [cdate, setcDate] = useState(current)
   const [times, setTimes] = useState([])
   const [reserve, setReserve] = useState(false)
   const [data, setData] = useState([])
@@ -26,15 +28,15 @@ const Reservation = () => {
     .then(res => {
       const resdata = res.data
       setData(resdata)
-      //--------------- for rendering the first day -------------
-      if(cdate === currentdate)
+      //------------ for rendering the first day ---------
+      if(cdate === current)
         renderTimeSlots(resdata)
     })
     .catch((error) =>
         console.log('Error sending data:', error)
   )}
 
-  //--------------------calls api once at render------------------------------
+  //----------------calls api once at render-------------
   useEffect(() => {
     if (dataFetchedRef.current) 
       return;
@@ -63,7 +65,7 @@ const Reservation = () => {
   }
 
   function renderTimeSlots(resdata){
-    const currentDay = resdata.filter(({date}) => date === cdate)
+    const currentDay = resdata.filter(({date}) => date === cdate.toDateString())
     const reservedTimes = currentDay.map(value => value.time)
     const timeSlots = formatTimes(reservedTimes)
     setTimes(timeSlots)
@@ -74,7 +76,7 @@ const Reservation = () => {
     currentdate = current.toDateString()
 
     setDays(days + 1)
-    setcDate(currentdate)
+    setcDate(current)
   
     const currentDay = data.filter(({date}) => date === currentdate)
     const reservedTimes = currentDay.map(value => value.time)
@@ -87,7 +89,7 @@ const Reservation = () => {
     currentdate = current.toDateString()
 
     setDays(days - 1)
-    setcDate(currentdate)
+    setcDate(current)
 
     const currentDay = data.filter(({date}) => date === currentdate)
     const reservedTimes = currentDay.map(value => value.time)
@@ -95,37 +97,35 @@ const Reservation = () => {
     setTimes(timeSlots)
   } 
 
-  function handleTimeSelection(dayChosen) {
-    setDateChosen(true)
-    setDateChosen(dayChosen)
+  function handleChange(selectedDate){
+    const diffTime = Math.abs(selectedDate - current)
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+
+    if (diffDays === 1)
+      current.setDate(current.getDate())
+    else
+      current.setDate(current.getDate() + (diffDays))
+
+    currentdate = current.toDateString()
+      
+    setDays(diffDays)
+    setcDate(current)
+    
+    const currentDay = data.filter(({date}) => date === currentdate)
+    const reservedTimes = currentDay.map(value => value.time)
+    const timeSlots = formatTimes(reservedTimes)
+    setTimes(timeSlots)
   }
 
   const displayTimeSlots = times.map((ele, i) => {
     return(
       <div className='center' key={i}>
-        {ele[0] && <button type="button" className="btn" value={ele[0]} onClick={() => handleTimeSelection(ele[0])}>{ele[0]}</button>}
-        {ele[1] && <button type="button" className="btn" value={ele[1]} onClick={() => handleTimeSelection(ele[1])}>{ele[1]}</button>}
-        {ele[2] && <button type="button" className="btn" value={ele[2]} onClick={() => handleTimeSelection(ele[2])}>{ele[2]}</button>}
+        {ele[0] && <button type="button" className="btn" value={ele[0]} onClick={() => setDateChosen(ele[0])}>{ele[0]}</button>}
+        {ele[1] && <button type="button" className="btn" value={ele[1]} onClick={() => setDateChosen(ele[1])}>{ele[1]}</button>}
+        {ele[2] && <button type="button" className="btn" value={ele[2]} onClick={() => setDateChosen(ele[2])}>{ele[2]}</button>}
       </div>
     )
   })
-
-  function handleChooseNewDate(){
-    
-  }
-
-  const handleReservation = (e) => {
-/*
-    const reservation = {
-      first: firstName,
-      last: lastName,
-      phone: phone,
-      email: email,
-      date: date,
-      time: time,
-      guests: guests
-    }*/
-  }
 
   return (
     <div className="prevent-select">
@@ -134,9 +134,11 @@ const Reservation = () => {
       {reserve && !dateChosen && 
         <div>
           <div className='center'>
-            <BsFillArrowLeftCircleFill onClick={() => days !== 1 ? previousDate() : '' } style={{cursor:'pointer'}} />
-            {`${' '}${cdate}${' '}`}
-            <BsFillArrowRightCircleFill onClick={() => {nextDate();}} style={{cursor:'pointer'}}/>
+              <DatePicker dateFormat='MMMM dd yyyy' minDate={new Date()} selected={cdate} onChange={(date) => handleChange(date)} />
+              <span>
+                <BsFillArrowLeftCircleFill size='10%' style={{float:'left', cursor:'pointer'}} onClick={() => days !== 1 ? previousDate() : '' } />
+                <BsFillArrowRightCircleFill size='10%' onClick={() => nextDate()} style={{float:'right', cursor:'pointer'}}/>
+              </span>
           </div>
           <div className='section'>
             <p className='center'> Available times below</p><br></br>
@@ -155,7 +157,7 @@ const Reservation = () => {
       {dateChosen && 
         <div>
           <div className='sub-container'>
-            <p>Date: {cdate}</p>
+            <p>Date: {cdate.toDateString()}</p>
             <p>Time: {dateChosen}</p>
           </div>
           <div className='center'>
