@@ -134,7 +134,7 @@ const Reservation = () => {
       {reserve && !dateChosen && 
         <div>
           <div className='center'>
-              <DatePicker dateFormat='MMMM dd yyyy' minDate={new Date()} selected={cdate} onChange={(date) => handleChange(date)} />
+              <DatePicker dateFormat='MMMM dd yyyy' popperPlacement="bottom" minDate={new Date()} selected={cdate} onChange={(date) => handleChange(date)} />
               <span>
                 <BsFillArrowLeftCircleFill size='10%' style={{float:'left', cursor:'pointer'}} onClick={() => days !== 1 ? previousDate() : '' } />
                 <BsFillArrowRightCircleFill size='10%' onClick={() => nextDate()} style={{float:'right', cursor:'pointer'}}/>
