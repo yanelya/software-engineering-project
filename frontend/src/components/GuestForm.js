@@ -23,6 +23,8 @@ const GuestForm = () => {
             email: email,
             numOfguest: numOfguest
           }
+
+        
     } 
 
   return (

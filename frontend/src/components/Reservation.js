@@ -166,6 +166,7 @@ const Reservation = () => {
           </div>
           <GuestForm />
           <hr></hr><br></br>
+          <button>Submit</button>
           <div className='center'>
             <CustomLink to='/Login'>Or login here</CustomLink>
           </div>
