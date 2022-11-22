@@ -23,6 +23,13 @@ const GuestForm = () => {
             email: email,
             numOfguest: numOfguest
           }
+          
+          /*Submit button in register*/
+          let buttonClear = document.querySelector('button');
+          let inputs = document.querySelectorAll('input');
+          buttonClear.addEventListener('click', () => {
+          inputs.forEach(input =>  input.value = '');
+});
 
         
     } 

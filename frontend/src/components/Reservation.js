@@ -150,7 +150,7 @@ const Reservation = () => {
       {!reserve && !dateChosen &&
         <div className='center'>
           <br></br>
-          <button type="button" className="btn" style={{background:'#000', color: '#fff'}} onClick={() => setReserve(true)}>Make a Reservation</button>
+          <button type="button" className="btn" style={{background:'#fff', color: '#000'}} onClick={() => setReserve(true)}>Make a Reservation</button>
         </div>
       }
 
@@ -166,7 +166,7 @@ const Reservation = () => {
           </div>
           <GuestForm />
           <hr></hr><br></br>
-          <button>Submit</button>
+            <button>Submit</button>
           <div className='center'>
             <CustomLink to='/Login'>Or login here</CustomLink>
           </div>
@@ -175,6 +175,7 @@ const Reservation = () => {
       
     </div>
   )
+  
 }
 
 export default Reservation

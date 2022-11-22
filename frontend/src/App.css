@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
 * {
@@ -8,6 +9,14 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+}
+
+.banner{
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(rgba(74, 67, 67, 0.75),rgb(0, 0, 0, 0.75)),url(image.jpg);
+  background-size: cover;
+  background-position: center;
 }
 
 .container {
@@ -51,7 +60,7 @@ body {
 .sub-container {
   background: #fff8e7;
   border: none;
-  padding: 10px 20px;
+  padding: 100px 20px;
   margin: 5px;
   border-radius: 5px;
 }
@@ -64,8 +73,9 @@ body {
 }
 
 /* NavBar */
+
 .nav {
-  background-color: #333;
+  background-color: #333333;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -94,14 +104,14 @@ body {
 
 .active:hover {
   background-color: #555;
-}
+} 
 
-/* Icons */
+/* Icons */ 
 .react-icons {
   vertical-align: middle;
-}
+} 
 
-/* Containers */
+/* Containers */ 
 .center {
   text-align: center;
 }
@@ -117,7 +127,7 @@ body {
   display:inline-block;
 }
 
-/* Buttons */
+/* Buttons */ 
 .btn {
   display: inline-block;
   border: none;
@@ -143,9 +153,9 @@ body {
   color: #fff;
   display: block;
   width: 100%;
-}
+} 
 
-/* Form control */
+/* Form control */ 
 .add-form {
   margin-bottom: 40px;
 }
@@ -173,11 +183,18 @@ body {
 footer {
   margin-top: 30px;
   text-align: center;
-}
+} 
 
-/* UX */
+/* UX */ 
 .prevent-select {
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
-}
+  -webkit-user-select: none; /* Safari */ 
+  -ms-user-select: none; /* IE 10 and IE 11 */ 
+  user-select: none; /* Standard syntax */ 
+} 
+
+input, button { /* Submit button in reservation */ 
+  display: inline-block;
+  padding: 10px 20px;
+} 
+
+
