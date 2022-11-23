@@ -22,7 +22,6 @@ body {
 }
 
 .container {
-  background-color: white;
   max-width: 500px;
   margin: 30px auto;
   overflow: auto;
@@ -60,8 +59,8 @@ body {
   text-decoration: underline;
 }
 
-.sub-container {
-  background: #fff8e7;
+.sub-container { /*This is the box that states the day and time you selected in reservation*/
+  background: #ffffff;
   border: none;
   padding: 100px 20px;
   margin: 5px;
@@ -170,7 +169,7 @@ body {
 }
 
 .active:hover {
-  background-color: #555;
+  background-color: rgb(255, 255, 255);
 } 
 
 /* Icons */ 
@@ -223,6 +222,10 @@ body {
 } 
 
 /* Form control */ 
+.add-form {
+  margin-bottom: 40px;
+}
+
 .form-control {
   margin: 20px 0;
 }
@@ -255,8 +258,7 @@ footer {
   user-select: none; /* Standard syntax */ 
 } 
 
- /* Submit button in reservation */ 
-input, button {
+input, button { /* Submit button in reservation */ 
   display: inline-block;
   padding: 10px 20px;
 } 
