@@ -1,3 +1,4 @@
+
 import React from 'react'
 import '../App.css'
 import { Link, useMatch, useResolvedPath } from 'react-router-dom'
@@ -9,11 +10,12 @@ const Navbar = () => {
         <ul>
           <CustomLink to='/Register'>Register</CustomLink>
           <CustomLink to='/Reservation'>Reservation</CustomLink>
-          <CustomLink to='/Login'>Login</CustomLink>          
+          <CustomLink to='/Login'>Login</CustomLink>
         </ul>
     </nav>
   )
 }
+
 
 
 export function CustomLink({to, children, ...props}){
@@ -28,4 +30,4 @@ export function CustomLink({to, children, ...props}){
   )
 }
 
-export default Navbar
+export default Navbar 
