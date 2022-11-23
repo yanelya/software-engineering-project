@@ -54,6 +54,7 @@ const RegisterForm = () => {
 
   
   return (
+    <div className='sub-header'>
     <form className='container' onSubmit={onSubmit}> 
 
       <h1 className='center'>Register</h1>
@@ -112,6 +113,7 @@ const RegisterForm = () => {
 
       <input type='submit' value='Submit' className='btn btn-block'/>
     </form>
+    </div>
   )
 }
 
