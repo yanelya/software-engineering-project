@@ -9,7 +9,7 @@ const Navbar = () => {
         <ul>
           <CustomLink to='/Register'>Register</CustomLink>
           <CustomLink to='/Reservation'>Reservation</CustomLink>
-          <CustomLink to='/Login'>Login</CustomLink>
+          <CustomLink to='/Login'>Login</CustomLink>          
         </ul>
     </nav>
   )

@@ -67,6 +67,7 @@ body {
   margin: 5px;
   border-radius: 5px;
 }
+
 .react-datepicker__input-container input {
   border: solid;
   text-align: center;
@@ -85,7 +86,7 @@ body {
   gap: 2 rem;
   padding: 0 1rem;
 
-}
+} 
 
 .nav ul {
   padding: 0;
@@ -102,18 +103,86 @@ body {
   display: flex;
   align-items: center;
   padding: 0 1rem;
+} */
+
+
+
+.nav{
+  width: 85%;
+  margin: auto;
+  padding: 35px 0;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
 }
+
+.logo{
+  width: 120px;
+  cursor: pointer;
+}
+
+.nav ul li{
+  list-style: none;
+  display: inline-block;
+  margin: 0 20px;
+  position: relative;
+}
+
+.nav ul li a{
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.nav ul li::after{
+  content: '';
+  height: 3px;
+  width: 0;
+  background: #ffffff;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  transition: 0.5s;
+}
+
+.nav ul li:hover::after{
+  width: 100%;
+
+}
+
+.content{
+  width: 100;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  color: white;
+}
+
+.content h1{
+  font-size: 70px;
+  margin-top: 80px;
+}
+
+.content p{
+  margin: 20px auto;
+  font-weight: 100;
+  line-height: 25px;
+}
+
 
 .active:hover {
   background-color: #555;
 } 
+
 
 /* Icons */ 
 .react-icons {
   vertical-align: middle;
 } 
 
-/* Containers */ 
+
+/* Containers */
 .center {
   text-align: center;
 }
@@ -129,7 +198,7 @@ body {
   display:inline-block;
 }
 
-/* Buttons */ 
+/* Buttons */ /*These are the buttons in the reservation tab with the times */
 .btn {
   display: inline-block;
   border: none;
@@ -195,5 +264,3 @@ input, button {
   display: inline-block;
   padding: 10px 20px;
 } 
-
-
