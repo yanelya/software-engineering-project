@@ -17,7 +17,7 @@ router.post('/customers', (req, res) => {
         points: 0,
         preferred_diner: 0
     })
-    
+
     newCustomer.save()
     .then(data => {
         res.json(data)
@@ -28,6 +28,18 @@ router.post('/customers', (req, res) => {
         console.log("Error saving response")
         return error.response;
     })
+})
+
+router.post('/login', async (req, res) => {
+    const { email,  password} = req.body
+    
+    const user = await customerTemplate.findOne({email});
+
+    if(!user){
+        return res.json({error: "User Not found"})
+    }
+
+    return res.json({success: "User found"})
 })
 
 /*
