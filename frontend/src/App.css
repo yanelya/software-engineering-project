@@ -13,8 +13,8 @@ body {
 
 .banner{
   width: 100%;
-  padding-bottom: 42%; 
-  background-image: linear-gradient(rgba(0, 0, 0, 0.50),rgb(0, 0, 0, 0.75)),url(image.jpg);
+  padding-bottom: 42%;
+  background-image: linear-gradient(rgba(74, 67, 67, 0.75),rgb(0, 0, 0, 0.75)),url(image.jpg);
   background-size: normal;
 }
 
