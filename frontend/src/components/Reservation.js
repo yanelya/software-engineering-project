@@ -152,7 +152,7 @@ const Reservation = () => {
         {!reserve && !dateChosen &&
           <div className='center'>
             <br></br>
-            <button type="button" className="btn"  onClick={() => setReserve(true)}>Make a Reservation</button>
+            <button type="button" className="btn"  style={{backgroundColor:'black', color:'white'}} onClick={() => setReserve(true)}>Make a Reservation</button>
           </div>
         }
 
