@@ -13,12 +13,22 @@ body {
 
 .banner{
   width: 100%;
+<<<<<<< HEAD
   padding-bottom: 5%; 
   background-image: linear-gradient(rgba(0, 0, 0, 0.30),rgb(0, 0, 0, 0.75)),url(image.jpg);
   background-size: normal;
+=======
+  height: 100vh;
+  background-image: linear-gradient(rgba(74, 67, 67, 0.75), rgb(0, 0, 0, 0.75)), url(../public/image.jpg);
+  background-attachment: fixed;
+  background-repeat: 'no-repeat';
+  background-size: cover;
+  padding-bottom: 70%;
+>>>>>>> fd8f47c6f894cb07922d1ef1725fb7a336e23713
 }
 
 .container {
+  background-color: white;
   max-width: 500px;
   margin: 30px auto;
   overflow: auto;
@@ -72,8 +82,7 @@ body {
   width: 50%;
 }
 
-/* NavBar 
-
+/* NavBar */
 .nav {
   background-color: #333333;
   color: white;
@@ -224,10 +233,6 @@ body {
 } 
 
 /* Form control */ 
-.add-form {
-  margin-bottom: 40px;
-}
-
 .form-control {
   margin: 20px 0;
 }
@@ -260,7 +265,8 @@ footer {
   user-select: none; /* Standard syntax */ 
 } 
 
-input, button { /* Submit button in reservation */ 
+ /* Submit button in reservation */ 
+input, button {
   display: inline-block;
   padding: 10px 20px;
 } 
