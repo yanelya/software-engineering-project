@@ -13,8 +13,8 @@ body {
 
 .banner{
   width: 100%;
-  padding-bottom: 42%; 
-  background-image: linear-gradient(rgba(0, 0, 0, 0.50),rgb(0, 0, 0, 0.75)),url(image.jpg);
+  padding-bottom: 5%; 
+  background-image: linear-gradient(rgba(0, 0, 0, 0.30),rgb(0, 0, 0, 0.75)),url(image.jpg);
   background-size: normal;
 }
 
@@ -56,8 +56,8 @@ body {
   text-decoration: underline;
 }
 
-.sub-container {
-  background: #fff8e7;
+.sub-container { /*This is the box that states the day and time you selected in reservation*/
+  background: #ffffff;
   border: none;
   padding: 100px 20px;
   margin: 5px;
@@ -169,7 +169,7 @@ body {
 
 
 .active:hover {
-  background-color: #555;
+  background-color: rgb(255, 255, 255);
 } 
 
 
