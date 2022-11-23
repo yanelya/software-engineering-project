@@ -54,62 +54,66 @@ const RegisterForm = () => {
 
   
   return (
-    <form onSubmit={onSubmit}> 
-      <div className='form-control'>
-        <label>First Name</label>
-        <input type='text' placeholder='First Name' value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
-      </div>
+    <div className='bottom-space'>
+      <form className='container' onSubmit={onSubmit}> 
 
-      <div className='form-control'>
-        <label>Last Name</label>
-        <input type='text' placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)}/>
-      </div>
+        <h1 className='center'>Register</h1>
+        <div className='form-control'>
+          <label>First Name</label>
+          <input type='text' placeholder='First Name' value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+        </div>
 
-      <div className='form-control'>
-        <label>Phone Number</label>
-        <input type='text' placeholder='Phone Number' value={phone} onChange={(e) => setPhone(e.target.value)}/>
-      </div>
+        <div className='form-control'>
+          <label>Last Name</label>
+          <input type='text' placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+        </div>
 
-      <div className='form-control'>
-        <label>Email</label>
-        <input type='text' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
-      </div>
+        <div className='form-control'>
+          <label>Phone Number</label>
+          <input type='text' placeholder='Phone Number' value={phone} onChange={(e) => setPhone(e.target.value)}/>
+        </div>
 
-      <div className='form-control'>
-        <label>Address</label>
-        <input type='text' placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)}/>
-      </div>
-          
-      <div className='center'>
-        <input name="billing" type='checkbox' onChange={() => setShowBilling((prev) => !prev)}/>
-        <label htmlFor="billing"> Billing address is different as mailing address</label>
-      </div>
+        <div className='form-control'>
+          <label>Email</label>
+          <input type='text' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
+        </div>
 
-      {showBilling &&
+        <div className='form-control'>
+          <label>Address</label>
+          <input type='text' placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)}/>
+        </div>
+            
+        <div className='center'>
+          <input name="billing" type='checkbox' onChange={() => setShowBilling((prev) => !prev)}/>
+          <label htmlFor="billing"> Billing address is different as mailing address</label>
+        </div>
 
-      <div className='form-control'>
-        <label>Billing Address</label>
-        <input type='text' placeholder='Billing Address' value={billingAddress} onChange={(e) => setBillingAddress(e.target.value)}/>
-      </div>
+        {showBilling &&
 
-      }
+        <div className='form-control'>
+          <label>Billing Address</label>
+          <input type='text' placeholder='Billing Address' value={billingAddress} onChange={(e) => setBillingAddress(e.target.value)}/>
+        </div>
 
-      <div className='form-control'>
-        <label htmlFor="payment">Choose preferred payment method:</label>
-        <select name="payment" onChange={(e) => setPaymentMethod(e.target.value)}>
-          <option value="Card">Card</option>
-          <option value="Cash">Cash</option>
-          <option value="Check">Check</option>
-        </select >
-      </div>
+        }
 
-      <div className='form-control'>
-        <label>Password</label>
-        <input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-      </div>
+        <div className='form-control'>
+          <label htmlFor="payment">Choose preferred payment method:</label>
+          <select name="payment" onChange={(e) => setPaymentMethod(e.target.value)}>
+            <option value="Card">Card</option>
+            <option value="Cash">Cash</option>
+            <option value="Check">Check</option>
+          </select >
+        </div>
 
-      <input type='submit' value='Submit' className='btn btn-block'/>
-    </form>
+        <div className='form-control'>
+          <label>Password</label>
+          <input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+        </div>
+
+        <input type='submit' value='Submit' className='btn btn-block'/>
+      </form>
+    </div>
   )
 }
 

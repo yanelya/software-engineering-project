@@ -128,51 +128,56 @@ const Reservation = () => {
   })
 
   return (
-    <div className="prevent-select">
-      <h1 className='sub-header'>Reservation</h1>
+    <div className='bottom-space'>
+    <div className='container'>
+      <div className="prevent-select">
+        <h1 className='bottom-space'>Reservation</h1>
 
-      {reserve && !dateChosen && 
-        <div>
-          <div className='center'>
-              <DatePicker dateFormat='MMMM dd yyyy' popperPlacement="bottom" minDate={new Date()} selected={cdate} onChange={(date) => handleChange(date)} />
-              <span>
-                <BsFillArrowLeftCircleFill size='10%' style={{float:'left', cursor:'pointer'}} onClick={() => days !== 1 ? previousDate() : '' } />
-                <BsFillArrowRightCircleFill size='10%' onClick={() => nextDate()} style={{float:'right', cursor:'pointer'}}/>
-              </span>
+        {reserve && !dateChosen && 
+          <div>
+            <div className='center'>
+                <DatePicker dateFormat='MMMM dd yyyy' popperPlacement="bottom" minDate={new Date()} selected={cdate} onChange={(date) => handleChange(date)} />
+                <span>
+                  <BsFillArrowLeftCircleFill size='10%' style={{float:'left', cursor:'pointer'}} onClick={() => days !== 1 ? previousDate() : '' } />
+                  <BsFillArrowRightCircleFill size='10%' onClick={() => nextDate()} style={{float:'right', cursor:'pointer'}}/>
+                </span>
+            </div>
+            <div className='section'>
+              <p className='center'> Available times below</p><br></br>
+              {displayTimeSlots}
+            </div>
           </div>
-          <div className='section'>
-            <p className='center'> Available times below</p><br></br>
-            {displayTimeSlots}
-          </div>
-        </div>
-      }
+        }
 
-      {!reserve && !dateChosen &&
-        <div className='center'>
-          <br></br>
-          <button type="button" className="btn" style={{background:'#fff', color: '#000'}} onClick={() => setReserve(true)}>Make a Reservation</button>
-        </div>
-      }
-
-      {dateChosen && 
-        <div>
-          <div className='sub-container'>
-            <p>Date: {cdate.toDateString()}</p>
-            <p>Time: {dateChosen}</p>
-          </div>
+        {!reserve && !dateChosen &&
           <div className='center'>
             <br></br>
-            <p className='mock-link' onClick={() => setDateChosen(false)}>Select different time or date</p>
+            <button type="button" className="btn"  onClick={() => setReserve(true)}>Make a Reservation</button>
           </div>
-          <GuestForm />
-          <hr></hr><br></br>
-            <button>Submit</button>
-          <div className='center'>
-            <CustomLink to='/Login'>Or login here</CustomLink>
+        }
+
+        {dateChosen && 
+          <div>
+            <div className='sub-container'>
+              <p>Date: {cdate.toDateString()}</p>
+              <p>Time: {dateChosen}</p>
+            </div>
+            <div className='center'>
+              <br></br>
+              <p className='mock-link' onClick={() => setDateChosen(false)}>Select different time or date</p>
+            </div>
+
+            <GuestForm />
+            <hr></hr><br></br>
+
+            <div className='center'>
+              <CustomLink to='/Login'>Or login here</CustomLink>
+            </div>
           </div>
-        </div>
-      }
-      
+        }
+        
+      </div>
+      </div>
     </div>
   )
   

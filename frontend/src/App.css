@@ -1,29 +1,30 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
+/* Main CSS */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-body {
   font-family: 'Poppins', sans-serif;
 }
 
-.banner{
+body {
   width: 100%;
-  padding-bottom: 5%; 
-  /*background-image: linear-gradient(rgba(0, 0, 0, 0.50),rgb(0, 0, 0, 0.75)),url(background_image.jpg); */
-  background-size: normal;
+  height: 100vh;
+  background-image: linear-gradient(rgba(74, 67, 67, 0.75), rgb(0, 0, 0, 0.75)), url(../public/background_image.jpg);
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  /*padding-bottom: 20%;*/
 }
 
 .container {
+  background-color: white;
   max-width: 500px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
-  border: 1px solid black;
   padding: 30px;
   border-radius: 5px;
 }
@@ -32,21 +33,30 @@ body {
   padding: 30px;
 }
 
-.vertical-center {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  text-align: center;
-}
-
 .site-title {
   font-size: 2rem;
 }
 
-.sub-header {
+.bottom-space {
  padding-bottom: 20px;
 }
 
+.sub-container { /*This is the box that states the day and time you selected in reservation*/
+  border: none;
+  margin: 5px;
+}
+
+/* Date Calendar */
+.react-datepicker__input-container input {
+  border-radius: 5px;
+  border: solid;
+  text-align: center;
+  font-size: medium;
+  height: 50px;
+  width: 50%;
+}
+
+/* Psuedo link */
 .mock-link {
   cursor: pointer;
 }
@@ -74,23 +84,25 @@ body {
 
 /* NavBar */ /*
 
+/* NavBar 
+.logo{
+  width: 120px;
+  cursor: pointer;
+} */
+
 .nav {
-  background-color: #333333;
   color: white;
+  width: 85%;
+  margin: auto;
+  padding: 35px 0;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: stretch;
-  gap: 2 rem;
-  padding: 0 1rem;
+}
 
-} 
-
-.nav ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  display: flex;
-  gap: 1rem;
+.title{
+  display: inline-flex !important;
+  align-items: center;
 }
 
 .nav a{
@@ -100,7 +112,7 @@ body {
   display: flex;
   align-items: center;
   padding: 0 1rem;
-} */
+} 
 
 
 
@@ -118,20 +130,16 @@ body {
   cursor: pointer;
 }
 
-.nav ul li{
+/*.nav ul li{*/
+.nav ul {
   list-style: none;
-  display: inline-block;
+  display: flex;
   margin: 0 20px;
   position: relative;
-}
-
-.nav ul li a{
-  text-decoration: none;
-  color: #fff;
   text-transform: uppercase;
 }
 
-.nav ul li::after{
+.nav ul::after{
   content: '';
   height: 3px;
   width: 0;
@@ -142,18 +150,17 @@ body {
   transition: 0.5s;
 }
 
-.nav ul li:hover::after{
+.nav ul:hover::after{
   width: 100%;
-
 }
 
+/*Home page*/
 .content{
-  width: 100;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   text-align: center;
   color: white;
+  position: absolute;
+  top:30%;
+  width: 100%;
 }
 
 .content h1{
@@ -184,19 +191,14 @@ body {
   text-align: center;
 }
 
-.center-inline{
-  height: 200px;
-  position: relative;
-}
-
 .divider{
   width:4px;
   height:auto;
   display:inline-block;
 }
 
-/* Buttons */ /*These are the buttons in the reservation tab with the times */
-.btn {
+/* Buttons */ 
+.btn { /*These are the buttons in the reservation tab with the times */
   display: inline-block;
   border: none;
   padding: 10px 20px;
@@ -223,11 +225,12 @@ body {
   width: 100%;
 } 
 
-/* Form control */ 
-.add-form {
-  margin-bottom: 40px;
-}
+input, button { /* Submit button in reservation */ 
+  display: inline-block;
+  padding: 10px 20px;
+} 
 
+/* Form control */ 
 .form-control {
   margin: 20px 0;
 }
@@ -244,23 +247,9 @@ body {
   font-size: 17px;
 }
 
-.form-control-check label {
-  flex: 1;
-}
-
-footer {
-  margin-top: 30px;
-  text-align: center;
-} 
-
 /* UX */ 
 .prevent-select {
   -webkit-user-select: none; /* Safari */ 
   -ms-user-select: none; /* IE 10 and IE 11 */ 
   user-select: none; /* Standard syntax */ 
-} 
-
-input, button { /* Submit button in reservation */ 
-  display: inline-block;
-  padding: 10px 20px;
 } 

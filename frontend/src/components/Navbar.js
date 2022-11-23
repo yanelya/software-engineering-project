@@ -5,14 +5,20 @@ import { Link, useMatch, useResolvedPath } from 'react-router-dom'
 
 const Navbar = () => {
   return (
-    <nav className='nav'>
-        <Link to="/" className='site-title'>Restaurant</Link>
+    <div>
+      <nav className='nav'>
+        <span className='title'>
+          <img src='/logo2.png' className="logo"/>
+          <Link to="/" className='site-title'>Restaurant</Link>
+        </span>
+
         <ul>
           <CustomLink to='/Register'>Register</CustomLink>
           <CustomLink to='/Reservation'>Reservation</CustomLink>
           <CustomLink to='/Login'>Login</CustomLink>
         </ul>
-    </nav>
+      </nav>
+    </div>
   )
 }
 
