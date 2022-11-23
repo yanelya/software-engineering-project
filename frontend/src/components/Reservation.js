@@ -128,6 +128,7 @@ const Reservation = () => {
   })
 
   return (
+    <div className='container'>
     <div className="prevent-select">
       <h1 className='sub-header'>Reservation</h1>
 
@@ -173,6 +174,7 @@ const Reservation = () => {
         </div>
       }
       
+    </div>
     </div>
   )
   

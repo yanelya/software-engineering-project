@@ -16,7 +16,7 @@ const Login = () => {
     } 
 
   return (
-    <div>
+    <div className='container'>
         <h1 className='sub-header'>Login</h1>
         <form onSubmit={onSubmit}> 
             <div className='form-control'>

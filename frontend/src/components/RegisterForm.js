@@ -54,7 +54,9 @@ const RegisterForm = () => {
 
   
   return (
-    <form onSubmit={onSubmit}> 
+    <form className='container' onSubmit={onSubmit}> 
+
+      <h1 className='center'>Register</h1>
       <div className='form-control'>
         <label>First Name</label>
         <input type='text' placeholder='First Name' value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
