@@ -17,6 +17,7 @@ const Navbar = () => {
           <CustomLink to='/Reservation'>Reservation</CustomLink>
           <CustomLink to='/Login'>Login</CustomLink>
         </ul>
+        
       </nav>
     </div>
   )

@@ -100,6 +100,7 @@ const RegisterForm = () => {
         <div className='form-control'>
           <label htmlFor="payment">Choose preferred payment method:</label>
           <select name="payment" onChange={(e) => setPaymentMethod(e.target.value)}>
+            <option value="Select">-- Select --</option>
             <option value="Card">Card</option>
             <option value="Cash">Cash</option>
             <option value="Check">Check</option>

@@ -12,7 +12,6 @@ body {
   width: 100%;
   height: 100vh;
   background-image: linear-gradient(rgba(74, 67, 67, 0.75), rgb(0, 0, 0, 0.75)), url(../public/background_image.jpg);
-
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -82,13 +81,11 @@ body {
   width: 50%;
 }
 
-/* NavBar */ /*
-
-/* NavBar 
+/* NavBar */
 .logo{
   width: 120px;
   cursor: pointer;
-} */
+} 
 
 .nav {
   color: white;
@@ -117,7 +114,7 @@ body {
 
 
 .nav{
-  width: 85%;
+  width: 85%; /*adjusts the space between the navbar buttons */
   margin: auto;
   padding: 35px 0;
   display: flex;
@@ -130,7 +127,6 @@ body {
   cursor: pointer;
 }
 
-/*.nav ul li{*/
 .nav ul {
   list-style: none;
   display: flex;
@@ -174,10 +170,12 @@ body {
   line-height: 25px;
 }
 
+/* this creates the hover effect over the register button on navbar
 
-.active:hover {
-  background-color: rgb(255, 255, 255);
+.active:hover {  
+  background: #fff;
 } 
+*/
 
 
 /* Icons */ 
@@ -253,3 +251,4 @@ input, button { /* Submit button in reservation */
   -ms-user-select: none; /* IE 10 and IE 11 */ 
   user-select: none; /* Standard syntax */ 
 } 
+
