@@ -37,20 +37,18 @@ body {
   font-size: 2rem;
 }
 
-.sub-header {
+.bottom-space {
  padding-bottom: 20px;
 }
 
 .sub-container { /*This is the box that states the day and time you selected in reservation*/
-  background: #ffffff;
   border: none;
-  padding: 100px 20px;
   margin: 5px;
-  border-radius: 5px;
 }
 
 /* Date Calendar */
 .react-datepicker__input-container input {
+  border-radius: 5px;
   border: solid;
   text-align: center;
   font-size: medium;
