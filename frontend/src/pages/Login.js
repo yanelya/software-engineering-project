@@ -3,7 +3,6 @@ import { useState } from 'react'
 import isFieldEmpty from '../IsFieldEmpty';
 import axios from 'axios'
 
-
 const Login = () => {
     const [loginFields, setLoginFields] = useState({
         email: "",
@@ -21,11 +20,14 @@ const Login = () => {
         axios.post('http://localhost:4000/app/login', {
             email: loginFields.email,
             password: loginFields.password
-        }).then(res => {console.log(res.data)})
+        }).then(res => {console.log(res.data)
+            if(res.data.status === "ok"){
+                alert("login succesful")
+                window.localStorage.setItem("token", res.data.data)
+                window.location.href = "/home.js"
+            }
+        })
         .catch((err) => {console.log(err.res)})
-
-
-        // alert('email: ' + loginFields.email +  ' password: ' + loginFields.password)
     } 
 
   return (

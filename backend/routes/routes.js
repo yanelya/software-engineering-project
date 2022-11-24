@@ -2,8 +2,12 @@ import express from 'express'
 import customerTemplate from '../models/customer.model.js'
 import reservationTemplate from '../models/reservation.model.js'
 import tableModel from '../models/table.model.js'
+import jwt from 'jsonwebtoken'
+//import bcrypt from 'bcrypt'
 
 const router = express.Router()
+
+const JWT_SECRET = "euyew88r8uewjksdfjkspof0esiroe8()*$JAWierieirier"
 
 router.post('/customers', (req, res) => {
     const newCustomer = new customerTemplate({
@@ -40,7 +44,37 @@ router.post('/login', async (req, res) => {
         return res.json({error: "User Not found"})
     }
 
-    return res.json({success: "User found"})
+    //change to bcrypt compare later
+    if(password === user.password){
+        const token = jwt.sign({email: user.email}, JWT_SECRET)
+
+        if(res.status(201)){
+            return res.json({status: "ok", data: token})
+        }
+        else{
+            return res.json({error: "error"})
+        }
+
+    }
+
+    res.json({status: "error", error: "invalid Password"})
+})
+
+
+router.post('/userData', async (req, res) => {
+    const { token } = req.body
+
+    try{
+        const user = jwt.verify(token, JWT_SECRET)
+
+        const useremail = user.email
+        
+        customerTemplate.findOne({email: useremail})
+            .then((data) => {
+                res.send({status: "ok", data: data})
+            })
+    }
+    catch{}
 })
 
 /*
