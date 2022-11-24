@@ -6,32 +6,21 @@ const GuestForm = () => {
     const [lastName, setLastName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
-    const [numOfguest, setNumOfguest] = useState('')
+    const [numOfguests, setNumOfguests] = useState('')
 
     const onSubmit = (e) => {
-        e.preventDefault()
+      e.preventDefault()
 
-        if(!firstName || !lastName || !phone || !email || !numOfguest){
-            alert('Missing field')
-            return
-          }
-      
-          const guestInfomration = {
-            first: firstName,
-            last: lastName,
-            phone: phone,
-            email: email,
-            numOfguest: numOfguest
-          }
-          
-          /*Submit button in register*/
-          let buttonClear = document.querySelector('button');
-          let inputs = document.querySelectorAll('input');
-          buttonClear.addEventListener('click', () => {
-          inputs.forEach(input =>  input.value = '');
-});
-
-        
+      if(!firstName || !lastName || !phone || !email || !numOfguests){
+          alert('Missing fields')
+          return
+        }
+    
+        setFirstName('')
+        setLastName('')
+        setPhone('')
+        setEmail('')
+        setNumOfguests('') 
     } 
 
   return (
@@ -58,8 +47,10 @@ const GuestForm = () => {
 
       <div className='form-control'>
         <label>Number of Guests</label>
-        <input type='text' placeholder='Number of Guests' value={numOfguest} onChange={(e) => setNumOfguest(e.target.value)}/>
+        <input type='text' placeholder='Number of Guests' value={numOfguests} onChange={(e) => setNumOfguests(e.target.value)}/>
       </div>
+
+      <input type='submit' value='Check avaliable tables' className='btn btn-block'/>
     </form>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { customersEndpoint } from '../constantValues'
 
 const RegisterForm = () => {
   const [firstName, setFirstName] = useState('')
@@ -35,7 +36,7 @@ const RegisterForm = () => {
       password: password
     }
 
-    axios.post('http://localhost:4000/app/customers', registered)
+    axios.post(customersEndpoint, registered)
     .then(res => 
       console.log(res.data))
     .catch((error) =>
@@ -100,7 +101,7 @@ const RegisterForm = () => {
         <div className='form-control'>
           <label htmlFor="payment">Choose preferred payment method:</label>
           <select name="payment" onChange={(e) => setPaymentMethod(e.target.value)}>
-            <option value="Select">-- Select --</option>
+            <option value="Select" defaultValue hidden>-- Select --</option>
             <option value="Card">Card</option>
             <option value="Cash">Cash</option>
             <option value="Check">Check</option>

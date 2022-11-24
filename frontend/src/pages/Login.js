@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import isFieldEmpty from './IsFieldEmpty';
+import isFieldEmpty from '../IsFieldEmpty';
 import axios from 'axios'
 
 

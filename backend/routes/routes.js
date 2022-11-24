@@ -1,6 +1,7 @@
 import express from 'express'
 import customerTemplate from '../models/customer.model.js'
 import reservationTemplate from '../models/reservation.model.js'
+import tableModel from '../models/table.model.js'
 
 const router = express.Router()
 
@@ -65,16 +66,29 @@ router.post('/reservations', (req, res) => {
     })
 })*/
 
-router.get('/reservations', (request, response) => {
+router.get('/reservations', (req, res) => {
     reservationTemplate.find()
     .then(data => {
-        response.json(data)
+        res.json(data)
         console.log('Reservations returned')
     })
     .catch(error => {
-        response.json(error)
+        res.json(error)
         console.log('Error getting reservations')
-        return error.response;
+        return error.res
+    })
+})
+
+router.get('/tables', (req, res) => {
+    tableModel.find()
+    .then(data => {
+        res.json(data)
+        console.log('getting table info')
+    })
+    .catch(error => {
+        res.json(error)
+        console.log('Error getting table info')
+        return error.res
     })
 })
 

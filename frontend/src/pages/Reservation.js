@@ -1,11 +1,12 @@
 import React from 'react'
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from "react-icons/bs"
 import { useState, useEffect, useRef } from 'react'
-import GuestForm from './GuestForm'
+import GuestForm from '../components/GuestForm'
 import axios from 'axios'
-import {CustomLink} from './Navbar'
+import { CustomLink } from '../components/Navbar'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
+import { displayTimes, reservationsEndpoint, tableEndpoint} from '../constantValues'
 
 const Reservation = () => {
   let current = new Date()
@@ -14,20 +15,17 @@ const Reservation = () => {
   const [cdate, setcDate] = useState(current)
   const [times, setTimes] = useState([])
   const [reserve, setReserve] = useState(false)
-  const [data, setData] = useState([])
   const [dateChosen, setDateChosen] = useState(false)
-  const endpoint = 'http://localhost:4000/app/reservations'
+  const [reservationData, setReservationData] = useState([])
+  const [tableData, setTableData] = useState([])
   const dataFetchedRef = useRef(false);
-  const displayTimes = ['8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM',
-    '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM',
-    '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM']
-
-  //-------------------- Get Request --------------------
-  function getRequest () {
-    axios.get(endpoint, {})
+  
+  //-------------------- Get Requests --------------------
+  function reservationsGetRequest () {
+    axios.get(reservationsEndpoint, {})
     .then(res => {
       const resdata = res.data
-      setData(resdata)
+      setReservationData(resdata)
       //------------ for rendering the first day ---------
       if(cdate === current)
         renderTimeSlots(resdata)
@@ -36,12 +34,24 @@ const Reservation = () => {
         console.log('Error sending data:', error)
   )}
 
+  function tablesGetRequest () {
+    axios.get(tableEndpoint, {})
+    .then(res => {
+      const resdata = res.data
+      setTableData(resdata)
+    })
+    .catch((error) => {
+      console.log('Error sending data:', error)
+    })
+  }
+
   //----------------calls api once at render-------------
   useEffect(() => {
     if (dataFetchedRef.current) 
       return;
     dataFetchedRef.current = true
-    getRequest()
+    reservationsGetRequest()
+    tablesGetRequest()
   })
 
   function formatTimes(reservedTimes){
@@ -78,7 +88,7 @@ const Reservation = () => {
     setDays(days + 1)
     setcDate(current)
   
-    const currentDay = data.filter(({date}) => date === currentdate)
+    const currentDay = reservationData.filter(({date}) => date === currentdate)
     const reservedTimes = currentDay.map(value => value.time)
     const timeSlots = formatTimes(reservedTimes)
     setTimes(timeSlots)
@@ -91,13 +101,13 @@ const Reservation = () => {
     setDays(days - 1)
     setcDate(current)
 
-    const currentDay = data.filter(({date}) => date === currentdate)
+    const currentDay = reservationData.filter(({date}) => date === currentdate)
     const reservedTimes = currentDay.map(value => value.time)
     const timeSlots = formatTimes(reservedTimes)
     setTimes(timeSlots)
   } 
 
-  function handleChange(selectedDate){
+  function changeDate(selectedDate){
     const diffTime = Math.abs(selectedDate - current)
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 
@@ -111,7 +121,7 @@ const Reservation = () => {
     setDays(diffDays)
     setcDate(current)
     
-    const currentDay = data.filter(({date}) => date === currentdate)
+    const currentDay = reservationData.filter(({date}) => date === currentdate)
     const reservedTimes = currentDay.map(value => value.time)
     const timeSlots = formatTimes(reservedTimes)
     setTimes(timeSlots)
@@ -129,31 +139,31 @@ const Reservation = () => {
 
   return (
     <div className='bottom-space'>
-    <div className='container'>
-      <div className="prevent-select">
-        <h1 className='bottom-space'>Reservation</h1>
+      <div className='container'>
+        <div className="prevent-select">
+          <h1 className='bottom-space'>Reservation</h1>
 
-        {reserve && !dateChosen && 
-          <div>
+          {!reserve && !dateChosen &&
             <div className='center'>
-                <DatePicker dateFormat='MMMM dd yyyy' popperPlacement="bottom" minDate={new Date()} selected={cdate} onChange={(date) => handleChange(date)} />
-                <span>
-                  <BsFillArrowLeftCircleFill size='10%' style={{float:'left', cursor:'pointer'}} onClick={() => days !== 1 ? previousDate() : '' } />
-                  <BsFillArrowRightCircleFill size='10%' onClick={() => nextDate()} style={{float:'right', cursor:'pointer'}}/>
-                </span>
+              <br></br>
+              <button type="button" className="btn"  style={{backgroundColor:'black', color:'white'}} onClick={() => setReserve(true)}>Make a Reservation</button>
             </div>
-            <div className='section'>
-              <p className='center'> Available times below</p><br></br>
-              {displayTimeSlots}
-            </div>
-          </div>
-        }
+          }
 
-        {!reserve && !dateChosen &&
-          <div className='center'>
-            <br></br>
-            <button type="button" className="btn"  onClick={() => setReserve(true)}>Make a Reservation</button>
-          </div>
+          {reserve && !dateChosen && 
+            <div>
+              <div className='center'>
+                  <DatePicker dateFormat='MMMM dd yyyy' popperPlacement="bottom" minDate={new Date()} selected={cdate} onChange={(date) => changeDate(date)} />
+                  <span>
+                    <BsFillArrowLeftCircleFill size='10%' style={{float:'left', cursor:'pointer'}} onClick={() => days !== 1 ? previousDate() : '' } />
+                    <BsFillArrowRightCircleFill size='10%' onClick={() => nextDate()} style={{float:'right', cursor:'pointer'}}/>
+                  </span>
+              </div>
+              <div className='section'>
+                <p className='center'> Available times below</p><br></br>
+                {displayTimeSlots}
+              </div>
+            </div>
         }
 
         {dateChosen && 
@@ -168,16 +178,15 @@ const Reservation = () => {
             </div>
 
             <GuestForm />
-            <hr></hr><br></br>
-            <input type='submit' value='Submit' className='btn btn-block'/>
+            <br></br><hr></hr><br></br>
 
             <div className='center'>
               <CustomLink to='/Login'>Or login here</CustomLink>
             </div>
           </div>
         }
-        
-      </div>
+          
+        </div>
       </div>
     </div>
   )

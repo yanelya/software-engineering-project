@@ -1,9 +1,9 @@
 
 import Navbar from './components/Navbar'
-import Home from './components/Home'
-import Register from './components/Register'
-import Reservation from './components/Reservation'
-import Login from './components/Login'
+import Home from './pages/Home'
+import Register from './pages/Register'
+import Reservation from './pages/Reservation'
+import Login from './pages/Login'
 import { Route, Routes } from 'react-router-dom'
 
 function App() {
