@@ -58,9 +58,6 @@ body {
 /* Psuedo link */
 .mock-link {
   cursor: pointer;
-}
-
-.mock-link:hover {
   color: blue;
   text-decoration: underline;
 }
