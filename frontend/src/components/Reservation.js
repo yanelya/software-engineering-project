@@ -169,7 +169,7 @@ const Reservation = () => {
 
             <GuestForm />
             <hr></hr><br></br>
-            <button>Submit</button>
+            <input type='submit' value='Submit' className='btn btn-block'/>
 
             <div className='center'>
               <CustomLink to='/Login'>Or login here</CustomLink>
