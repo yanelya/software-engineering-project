@@ -1,4 +1,3 @@
-
 import React from 'react'
 import '../App.css'
 import { Link, useMatch, useResolvedPath } from 'react-router-dom'
@@ -8,7 +7,7 @@ const Navbar = () => {
     <div>
       <nav className='nav'>
         <span className='title'>
-          <img src='/logo2.png' className="logo"/>
+          <img src='/logo2.png' className="logo" alt='logo'/>
           <Link to="/" className='site-title'>Restaurant</Link>
         </span>
 

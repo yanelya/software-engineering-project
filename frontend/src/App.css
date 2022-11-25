@@ -11,7 +11,7 @@
 body {
   width: 100%;
   height: 100vh;
-  background-image: linear-gradient(rgba(74, 67, 67, 0.75), rgb(0, 0, 0, 0.75)), url(../public/background_image.jpg);
+  background-image: linear-gradient(rgba(74, 67, 67, 0.75), rgb(0, 0, 0, 0.75)), url(/background_image.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
