@@ -14,7 +14,8 @@ const MakeReservation = ({reservationDetails, reservationReady, reservationReady
         <div className='sub-container'>
             <p>Date: {reservationDetails.date.toDateString()}</p>
             <p>Time: {reservationDetails.time}</p>
-            <p>Table: {reservationDetails.table_number}</p>
+            <p>Guests: {reservationDetails.guests}</p>
+            <p>Table Number: {reservationDetails.table_number}</p>
         </div>
 
         <div className='center'>
