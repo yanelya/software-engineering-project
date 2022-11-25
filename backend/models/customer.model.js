@@ -37,6 +37,9 @@ const customerTemplate = new mongoose.Schema({
     },
     preferred_diner: {
         type: Number
+    },
+    admin: {
+        type: Boolean
     }
     
 })
