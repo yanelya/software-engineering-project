@@ -4,7 +4,7 @@ import axios from 'axios'
 import { userDataEndpoint } from '../constantValues'
 
 const Home = () => {
-  const [userName, setUserName] = useState('')
+  const [userName, setUserName] = useState('Guest')
 
   axios.post(userDataEndpoint, {
       token: window.localStorage.getItem("token")
@@ -17,7 +17,6 @@ const Home = () => {
         <h1>Welcome {userName}</h1>
         <p>Enjoy a luxurious evening with a one of a kind view only at our restaurant</p>
     </div>
-
   );
 }
 

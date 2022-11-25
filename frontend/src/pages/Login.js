@@ -25,7 +25,8 @@ const Login = () => {
             if(res.data.status === "ok"){
                 alert("login succesful")
                 window.localStorage.setItem("token", res.data.data)
-                window.location.href = "/home.js"
+                window.localStorage.setItem("isLoggedIn", true)
+                window.location.href = "/"
             }
         })
         .catch((err) => {console.log(err.res)})
