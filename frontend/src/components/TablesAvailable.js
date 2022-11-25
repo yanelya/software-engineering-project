@@ -1,42 +1,62 @@
 import React from 'react'
-import { useState } from 'react'
-import { tableNumbers } from '../constantValues'
+import { useState, useEffect, useRef } from 'react'
+import { tableEndpoint } from '../constantValues'
+import axios from 'axios'
 
-const TablesAvailable = ({occupantTables, reservationDetails, reservationReady}) => {
+const TablesAvailable = ({occupantTables, reservationDetails, addTable, reservationReady}) => {
+    const [tableData, setTableData] = useState([])
     const [fullOccupancy, setFullOccupancy] = useState(false)
-    let tables = Object.keys(tableNumbers)
-    tables = tables.map((i) => parseInt(i))
-    let arr = []
+    const [availableTables, setAvailableTables] = useState([])
+    const dataFetchedRef = useRef(false)
 
-    //checks if all tables are occupant
+    function tableGetRequest () {
+        axios.get(tableEndpoint, {})
+        .then(res => {
+            const resdata = res.data
+            setTableData(resdata)
+            getFreeTables(resdata)
+            checkAvailability()
+        })
+        .catch((error) =>
+            console.log('Error sending data:', error)
+    )}
+
+    useEffect(() => {
+        if (dataFetchedRef.current) 
+            return;
+        dataFetchedRef.current = true
+        tableGetRequest()
+    }) 
+
     function checkAvailability() {
-        if(occupantTables.length === tables.length)
+        if(occupantTables.length === tableData.length)
             setFullOccupancy(true)
     }
 
-    const getAvailableTables = tables.filter(i => !occupantTables.includes(i))
-    for(let i = 0; i < getAvailableTables.length; i++){
-            console.log(getAvailableTables[i])
-            arr.push(getAvailableTables[i])}
+    function getFreeTables (resdata){
+        const tableNumbers = resdata.map((value) => value.number).sort()
+        const getAvailableTables = tableNumbers.filter(i => !occupantTables.includes(i))
+        setAvailableTables(getAvailableTables)
+    }
 
-    const chooseTable = arr.map((ele, i) => {
-        return(
-            <div>   
-                <button  key={i} type="button" className="btn" value={ele} onClick={() => reservationReady()}>Table {ele}</button>
-            </div>
-        )
-      })
 
-      console.log(getAvailableTables)
-    checkAvailability()
   return (
     <div>
+        <p className='center'>Choose from available tables:</p>
         {!fullOccupancy &&
-           
-            {chooseTable}
- 
+            availableTables.map((ele, i) => {
+                return(
+                    <div className='center' key={i}>
+                        <button type="button" className="btn" value={ele} onClick={() => {
+                             reservationReady(true)
+                             reservationDetails.table_number = ele
+                             addTable({ ...reservationDetails })
+                        }}>Table {ele}</button>
+                    </div>
+                )
+            })
         }
-
+        
         {fullOccupancy &&
             <p> No tables available for given time frame </p>
         }

@@ -2,17 +2,24 @@ import React from 'react'
 import GuestForm from './GuestForm'
 import { CustomLink } from './Navbar'
 
-const MakeReservation = ({reservationDetails, date, timeChosen, reservationReady}) => {
+const MakeReservation = ({reservationDetails, reservationReady, reservationReady2}) => {
+
+  const onSubmit = () => {
+    reservationReady(false) 
+    reservationReady2(false)
+  }
+
   return (
     <div>
         <div className='sub-container'>
-            <p>Date: {date.toDateString()}</p>
-            <p>Time: {timeChosen}</p>
+            <p>Date: {reservationDetails.date.toDateString()}</p>
+            <p>Time: {reservationDetails.time}</p>
+            <p>Table: {reservationDetails.table_number}</p>
         </div>
 
         <div className='center'>
             <br></br>
-            <p className='mock-link' onClick={() => reservationReady(false)}>Select different time or date</p>
+            <p className='mock-link' onClick={onSubmit}>Select different time or date</p>
         </div>
 
         <GuestForm />

@@ -12,7 +12,8 @@ const ReservationForm = () => {
     const [reservation, setReservation] = useState({
         date: '',
         time: '',
-        guests: ''
+        guests: '',
+        table_number: ''
     })
     const [reservationData, setReservationData] = useState([])
     const [occupantTables, setOccupantTables] = useState([])
@@ -46,13 +47,13 @@ const ReservationForm = () => {
         <div className="prevent-select">
           <h1>Reservation</h1>
 
-          {!reserve && !dateChosen &&
+          {!reserve && !dateChosen && !tableChosen &&
             <ReservationButton 
             text='Make a Reservation' 
             reservationReady={setReserve} />
           }
 
-          {reserve && !dateChosen && 
+          {reserve && !dateChosen && !tableChosen &&
             <SearchReservation 
             reservations={reservationData} 
             availableTables={setOccupantTables} 
@@ -60,19 +61,19 @@ const ReservationForm = () => {
             selectedReservation={setReservation} />
           }
 
-          {dateChosen && 
+          {reserve && dateChosen && !tableChosen &&
             <TablesAvailable 
             occupantTables={occupantTables} 
             reservationDetails={reservation}
+            addTable={setReservation}
             reservationReady={setTableChosen} />
           }
 
-          {tableChosen && 
+          {reserve && dateChosen && tableChosen && 
             <MakeReservation 
             reservationDetails={reservation}
-            date={new Date()} 
-            timeChosen={dateChosen} 
-            reservationReady={setDateChosen} />
+            reservationReady={setDateChosen} 
+            reservationReady2={setTableChosen} />
           }
             
         </div>
