@@ -4,10 +4,14 @@ const displayTimes = ['8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '1
 
 const server = 'http://localhost:4000/app/'
 
-const reservationsEndpoint = server + 'reservations'
+const reservationsEndpoint = `${server}reservations`
 
-const tableEndpoint = server + 'tables'
+const tableEndpoint = `${server}tables`
 
-const customersEndpoint = server + 'customers'
+const customersEndpoint = `${server}customers`
 
-export {displayTimes, reservationsEndpoint, tableEndpoint, customersEndpoint}
+const userDataEndpoint = `${server}userData`
+
+const loginEndpoint = `${server}login`
+
+export {displayTimes, reservationsEndpoint, tableEndpoint, customersEndpoint, userDataEndpoint, loginEndpoint}

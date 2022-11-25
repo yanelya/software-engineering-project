@@ -1,9 +1,10 @@
 import React from 'react'
 import axios from 'axios'
+import { userDataEndpoint } from '../constantValues'
 
 const Home = () => {
 
-  axios.post('http://localhost:4000/app/userData', {
+  axios.post(userDataEndpoint, {
       token: window.localStorage.getItem("token")
   }).then(res => {console.log(res.data)})
   .catch((err) => {console.log(err.res)})
