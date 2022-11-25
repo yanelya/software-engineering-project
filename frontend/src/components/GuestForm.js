@@ -44,12 +44,7 @@ const GuestForm = () => {
         <label>Email</label>
         <input type='email' required placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
       </div>
-
-      <div className='form-control'>
-        <label>Number of Guests</label>
-        <input type='text' required placeholder='Number of Guests' value={numOfguests} onChange={(e) => setNumOfguests(e.target.value)}/>
-      </div>
-
+      
       <input type='submit' value='Check avaliable tables' className='btn btn-block'/>
     </form>
   )
