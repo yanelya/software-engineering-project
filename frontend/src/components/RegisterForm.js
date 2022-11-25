@@ -61,27 +61,27 @@ const RegisterForm = () => {
         <h1 className='center'>Register</h1>
         <div className='form-control'>
           <label>First Name</label>
-          <input type='text' placeholder='First Name' value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+          <input type='text' required placeholder='First Name' value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
         </div>
 
         <div className='form-control'>
           <label>Last Name</label>
-          <input type='text' placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+          <input type='text' required placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)}/>
         </div>
 
         <div className='form-control'>
           <label>Phone Number</label>
-          <input type='text' placeholder='Phone Number' value={phone} onChange={(e) => setPhone(e.target.value)}/>
+          <input type='text' required placeholder='Phone Number' value={phone} onChange={(e) => setPhone(e.target.value)}/>
         </div>
 
         <div className='form-control'>
           <label>Email</label>
-          <input type='text' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
+          <input type='email' required placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
         </div>
 
         <div className='form-control'>
           <label>Address</label>
-          <input type='text' placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)}/>
+          <input type='text' required placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)}/>
         </div>
             
         <div className='center'>
@@ -93,7 +93,7 @@ const RegisterForm = () => {
 
         <div className='form-control'>
           <label>Billing Address</label>
-          <input type='text' placeholder='Billing Address' value={billingAddress} onChange={(e) => setBillingAddress(e.target.value)}/>
+          <input type='text' required placeholder='Billing Address' value={billingAddress} onChange={(e) => setBillingAddress(e.target.value)}/>
         </div>
 
         }
@@ -110,7 +110,7 @@ const RegisterForm = () => {
 
         <div className='form-control'>
           <label>Password</label>
-          <input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+          <input type='password' required placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}/>
         </div>
 
         <input type='submit' value='Submit' className='btn btn-block'/>

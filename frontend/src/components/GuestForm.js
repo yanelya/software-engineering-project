@@ -27,27 +27,27 @@ const GuestForm = () => {
     <form onSubmit={onSubmit}> 
       <div className='form-control'>
         <label>First Name</label>
-        <input type='text' placeholder='First Name' value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+        <input type='text' required placeholder='First Name' value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
       </div>
 
       <div className='form-control'>
         <label>Last Name</label>
-        <input type='text' placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+        <input type='text' required placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)}/>
       </div>
 
       <div className='form-control'>
         <label>Phone Number</label>
-        <input type='text' placeholder='Phone Number' value={phone} onChange={(e) => setPhone(e.target.value)}/>
+        <input type='text' required placeholder='Phone Number' value={phone} onChange={(e) => setPhone(e.target.value)}/>
       </div>
 
       <div className='form-control'>
         <label>Email</label>
-        <input type='text' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
+        <input type='email' required placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
       </div>
 
       <div className='form-control'>
         <label>Number of Guests</label>
-        <input type='text' placeholder='Number of Guests' value={numOfguests} onChange={(e) => setNumOfguests(e.target.value)}/>
+        <input type='text' required placeholder='Number of Guests' value={numOfguests} onChange={(e) => setNumOfguests(e.target.value)}/>
       </div>
 
       <input type='submit' value='Check avaliable tables' className='btn btn-block'/>
