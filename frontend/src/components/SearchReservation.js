@@ -1,15 +1,36 @@
 import React from 'react'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
-import { useState } from 'react'
-import { displayTimes } from '../constantValues'
+import { useState, useEffect, useRef } from 'react'
+import { displayTimes, reservationsEndpoint } from '../constantValues'
+import axios from 'axios'
 
-
-const ReservationForm = ({reservations, availableTables, reservationReady, selectedReservation}) => {
+const SearchReservation = ({reservedTables, reservationReady, selectedReservation}) => {
     const [cdate, setDate] = useState(new Date())
     const [numOfguests, setNumOfguests] = useState('')
     const [time, setTime] = useState('')
-    const [isOpen, setIsOpen] = useState(false);    
+    const [isOpen, setIsOpen] = useState(false);  
+    const [reservationData, setReservationData] = useState([])
+    const dataFetchedRef = useRef(false)
+    
+    //-------------------- Get Request --------------------
+    function reservationsGetRequest () {
+        axios.get(reservationsEndpoint, {})
+        .then(res => {
+            const resdata = res.data
+            setReservationData(resdata)
+        })
+        .catch((error) =>
+            console.log('Error sending data:', error)
+    )}
+
+    //----------------calls api once at render-------------
+    useEffect(() => {
+        if (dataFetchedRef.current) 
+            return;
+        dataFetchedRef.current = true
+        reservationsGetRequest()
+    }) 
     
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -20,18 +41,17 @@ const ReservationForm = ({reservations, availableTables, reservationReady, selec
         }
 
         //grabbing tables being occupied given date & time
-        const reservationsForDateEntered = reservations.filter(({date}) => date === cdate.toDateString())
-        let reservedTables = []
-        for(let i = 0; i < reservationsForDateEntered.length; i++)
-            reservedTables.push(reservationsForDateEntered[i].table_number)
+        const reservationsForDateEntered = reservationData.filter(({date}) => date === cdate.toDateString())
+        const reservedTablesForDate = reservationsForDateEntered.map((value) => value.table_number)
 
         const reservation = {
             date: cdate, 
             time: time, 
-            guests: numOfguests
+            guests: numOfguests,
+            table_number: ''
         }
         
-        availableTables(reservedTables)
+        reservedTables(reservedTablesForDate)
         reservationReady(true)
         selectedReservation(reservation)
     }
@@ -89,4 +109,4 @@ const ReservationForm = ({reservations, availableTables, reservationReady, selec
   )
 }
 
-export default ReservationForm
+export default SearchReservation
