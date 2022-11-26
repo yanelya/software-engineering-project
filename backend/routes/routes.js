@@ -2,7 +2,7 @@ import express from 'express'
 import customerTemplate from '../models/customer.model.js'
 import reservationTemplate from '../models/reservation.model.js'
 import tableModel from '../models/table.model.js'
-//import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 //import bcrypt from 'bcrypt'
 
 const router = express.Router()
