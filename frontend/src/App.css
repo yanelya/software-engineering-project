@@ -157,6 +157,19 @@ body {
   display:inline-block;
 }
 
+/* Modal */
+.react-confirm-alert-body {
+  text-align: center !important;
+  white-space: pre;
+}
+
+.react-confirm-alert-button-group > button{
+  text-align: center !important;
+  margin: auto !important;
+  padding: 15px 32px !important;
+  font-size: 15px !important;
+}
+
 /* Buttons */ 
 .btn { /*These are the buttons in the reservation tab with the times */
   display: inline-block;
