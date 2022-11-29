@@ -5,6 +5,17 @@ import { useState, useEffect, useRef } from 'react'
 import { displayTimes, reservationsEndpoint } from '../constantValues'
 import axios from 'axios'
 
+//-------------------- Get Request --------------------
+export const reservationsGetRequest = async () => {
+    try{
+        return await axios.get(reservationsEndpoint)
+    }
+    catch (error) {
+        console.log('Error getting reservation data:', error)
+        return []
+    }
+ }
+
 const SearchReservation = ({reservedTables, reservationReady, selectedReservation}) => {
     const [cdate, setDate] = useState(new Date())
     const [numOfguests, setNumOfguests] = useState('')
@@ -12,25 +23,17 @@ const SearchReservation = ({reservedTables, reservationReady, selectedReservatio
     const [isOpen, setIsOpen] = useState(false);  
     const [reservationData, setReservationData] = useState([])
     const dataFetchedRef = useRef(false)
-    
-    //-------------------- Get Request --------------------
-    function reservationsGetRequest () {
-        axios.get(reservationsEndpoint, {})
-        .then(res => {
-            const resdata = res.data
-            setReservationData(resdata)
-        })
-        .catch((error) =>
-            console.log('Error sending data:', error)
-    )}
 
     //----------------calls api once at render-------------
     useEffect(() => {
         if (dataFetchedRef.current) 
             return;
         dataFetchedRef.current = true
-        reservationsGetRequest()
-    }) 
+        reservationsGetRequest().then(res => {
+            const resdata = res.data
+            setReservationData(resdata)
+        })
+    }, []) 
     
     const handleSubmit = (e) => {
         e.preventDefault()
