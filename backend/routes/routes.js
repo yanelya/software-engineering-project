@@ -111,6 +111,7 @@ router.get('/reservations', (req, res) => {
     .then(data => {
         console.log('getting reservations in get endpoint')
         res.json(data)
+        console.log('Reservations returned')
     })
     .catch(error => {
         res.json(error)
@@ -125,6 +126,7 @@ router.get('/tables', (req, res) => {
     .then(data => {
         console.log('getting tables from get endpoint')
         res.json(data)
+        console.log('getting table info')
     })
     .catch(error => {
         res.json(error)
