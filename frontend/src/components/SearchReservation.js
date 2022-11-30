@@ -4,10 +4,26 @@ import "react-datepicker/dist/react-datepicker.css"
 import { displayTimes, reservationsEndpoint } from '../constantValues'
 import axios from 'axios'
 
+<<<<<<< HEAD
+=======
+//-------------------- Get Request --------------------
+export const reservationsGetRequest = async () => {
+    try{
+        console.log(axios.get(reservationsEndpoint))
+        return await axios.get(reservationsEndpoint)
+    }
+    catch (error) {
+        console.log('Error getting reservation data:', error)
+        return []
+    }
+ }
+ 
+
+>>>>>>> 9cffb660b6eb622ae3278de5b65acb174fd5f292
 const SearchReservation = ({reservedTables, reservationReady, selectedReservation}) => {
     const [cdate, setDate] = useState(new Date())
     const [numOfguests, setNumOfguests] = useState('')
-    const [time, setTime] = useState('')
+    const [timeChosen, setTime] = useState('')
     const [isOpen, setIsOpen] = useState(false);  
     const [reservationData, setReservationData] = useState([])
     const dataFetchedRef = useRef(false)
@@ -29,23 +45,36 @@ const SearchReservation = ({reservedTables, reservationReady, selectedReservatio
             return;
         dataFetchedRef.current = true
         reservationsGetRequest()
+<<<<<<< HEAD
     }) 
+=======
+        .then(res => {
+            const resdata = res.data
+            setReservationData(resdata)
+        })
+        .catch(res => {
+            console.log('Error getting reservations')
+        })
+
+    }, []) 
+>>>>>>> 9cffb660b6eb622ae3278de5b65acb174fd5f292
     
     const handleSubmit = (e) => {
         e.preventDefault()
         
-        if(!cdate || !numOfguests || !time){
+        if(!cdate || !numOfguests || !timeChosen){
             alert('Missing fields')
             return
         }
 
         //grabbing tables being occupied given date & time
         const reservationsForDateEntered = reservationData.filter(({date}) => date === cdate.toDateString())
+        //reservationsForDateEntered = reservationsForDateEntered.filter(({time}) => time === timeChosen)
         const reservedTablesForDate = reservationsForDateEntered.map((value) => value.table_number)
 
         const reservation = {
             date: cdate, 
-            time: time, 
+            time: timeChosen, 
             guests: numOfguests,
             table_number: ''
         }

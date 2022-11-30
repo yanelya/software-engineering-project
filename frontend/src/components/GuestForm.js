@@ -34,8 +34,27 @@ const GuestForm = ({ reservationDetails }) => {
         
       .catch((error) =>
         console.log('Error sending data:', error))
-    
     }
+
+    useEffect(() => {
+      if (dataFetchedRef.current) 
+        return
+      dataFetchedRef.current = true
+      
+      confirmAlert({
+        title: 'Register?',
+        message: 'Register before making reservation?',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => {navigate('/Register')}
+          },
+          {
+            label: 'No'
+          }
+        ]
+      })
+    })
 
     const onSubmit = (e) => {
       e.preventDefault()
@@ -71,27 +90,6 @@ const GuestForm = ({ reservationDetails }) => {
       })
 
     } 
-
-    useEffect(() => {
-      if (dataFetchedRef.current) 
-        return
-      dataFetchedRef.current = true
-      
-      confirmAlert({
-        title: 'Register?',
-        message: 'Register before making reservation?',
-        buttons: [
-          {
-            label: 'Yes',
-            onClick: () => {navigate('/Register')}
-          },
-          {
-            label: 'No'
-          }
-        ]
-      })
-      
-    })
 
   return (
     <form onSubmit={onSubmit}> 
