@@ -4,7 +4,7 @@ import { CustomLink } from './Navbar'
 
 const MakeReservation = ({reservationDetails, reservationReady, reservationReady2}) => {
 
-  const onSubmit = () => {
+  const onClick = () => {
     reservationReady(false) 
     reservationReady2(false)
   }
@@ -20,10 +20,10 @@ const MakeReservation = ({reservationDetails, reservationReady, reservationReady
 
         <div className='center'>
             <br></br>
-            <p className='mock-link' onClick={onSubmit}>Select different time or date</p>
+            <p className='mock-link' onClick={onClick}>Select different time or date</p>
         </div>
 
-        <GuestForm />
+        <GuestForm reservationDetails={reservationDetails}/>
         <br></br><hr></hr><br></br>
 
         <div className='center'>

@@ -1,27 +1,97 @@
-import React from 'react'
-import { useState } from 'react'
+import axios from 'axios'
+import React, { useState, useEffect, useRef } from 'react'
+import { reservationsEndpoint } from '../constantValues'
+import { confirmAlert } from 'react-confirm-alert'
+import { useNavigate } from 'react-router-dom'
 
-const GuestForm = () => {
+const GuestForm = ({ reservationDetails }) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
-    const [numOfguests, setNumOfguests] = useState('')
+    const dataFetchedRef = useRef(false)
+    let navigate = useNavigate()
 
-    const onSubmit = (e) => {
-      e.preventDefault()
+    function reservationPostRequest(reservation){
+      axios.post(reservationsEndpoint, reservation)
+      .then(res =>{ 
 
-      if(!firstName || !lastName || !phone || !email || !numOfguests){
-          alert('Missing fields')
-          return
-        }
-    
+        confirmAlert({
+          title: 'Reservation created!',
+          message: 'No show will have minimum $10 charge',
+          buttons: [
+            {
+              label: 'Okay'
+            }
+          ]
+        })
+  
         setFirstName('')
         setLastName('')
         setPhone('')
         setEmail('')
-        setNumOfguests('') 
+      })
+        
+      .catch((error) =>
+        console.log('Error sending data:', error))
+    
+    }
+
+    const onSubmit = (e) => {
+      e.preventDefault()
+
+      if(!firstName || !lastName || !phone || !email){
+          alert('Missing fields')
+          return
+        }
+      
+      
+      const reservation = {
+        first: firstName,
+        last: lastName,
+        phone: phone,
+        email: email,
+        date: reservationDetails.date.toDateString(),
+        time: reservationDetails.time, 
+        guests: reservationDetails.guests,
+        table_number: reservationDetails.table_number
+      }
+
+      confirmAlert({
+        title: 'Confirm reservation',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => reservationPostRequest(reservation)
+          },
+          {
+            label: 'No'
+          }
+        ]
+      })
+
     } 
+
+    useEffect(() => {
+      if (dataFetchedRef.current) 
+        return
+      dataFetchedRef.current = true
+      
+      confirmAlert({
+        title: 'Register?',
+        message: 'Register before making reservation?',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => {navigate('/Register')}
+          },
+          {
+            label: 'No'
+          }
+        ]
+      })
+      
+    })
 
   return (
     <form onSubmit={onSubmit}> 
@@ -45,7 +115,7 @@ const GuestForm = () => {
         <input type='email' required placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
       </div>
       
-      <input type='submit' value='Check avaliable tables' className='btn btn-block'/>
+      <input type='submit' value='Make reservation' className='btn btn-block'/>
     </form>
   )
 }
