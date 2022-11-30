@@ -104,6 +104,7 @@ router.get('/reservations', (req, res) => {
     reservationTemplate.find()
     .then(data => {
         res.json(data)
+        console.log('Reservations returned')
     })
     .catch(error => {
         res.json(error)
@@ -116,6 +117,7 @@ router.get('/tables', (req, res) => {
     tableModel.find()
     .then(data => {
         res.json(data)
+        console.log('getting table info')
     })
     .catch(error => {
         res.json(error)
