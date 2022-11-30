@@ -9,6 +9,8 @@ const router = express.Router()
 
 const JWT_SECRET = "euyew88r8uewjksdfjkspof0esiroe8()*$JAWierieirier"
 
+
+/************************* CUSTOMER ENDPOINT *************************/
 router.post('/customers', (req, res) => {
     const newCustomer = new customerTemplate({
         first: req.body.first,
@@ -35,8 +37,9 @@ router.post('/customers', (req, res) => {
     })
 })
 
+/************************* LOGIN ENDPOINT ******************************/
 router.post('/login', async (req, res) => {
-    const { email,  password} = req.body
+    const { email,  password } = req.body
     
     const user = await customerTemplate.findOne({email});
 
@@ -60,7 +63,7 @@ router.post('/login', async (req, res) => {
     res.json({status: "error", error: "invalid Password"})
 })
 
-
+/************************* USERDATA ENDPOINT *****************************/
 router.post('/userData', async (req, res) => {
     const { token } = req.body
 
@@ -77,8 +80,9 @@ router.post('/userData', async (req, res) => {
     catch{}
 })
 
-/*
+/************************* RESERVATIONS ENDPOINT *************************/
 router.post('/reservations', (req, res) => {
+    console.log('in backend')
     const newReservation = new reservationTemplate({
         first: req.body.first,
         last: req.body.last,
@@ -86,7 +90,8 @@ router.post('/reservations', (req, res) => {
         email: req.body.email,
         date: req.body.date,
         time: req.body.time,
-        guest: req.body.guests
+        guests: req.body.guests,
+        table_number: req.body.table_number
     })
     
     newReservation.save()
@@ -95,14 +100,16 @@ router.post('/reservations', (req, res) => {
         res.json(data)
     })
     .catch(error => {
-        console.log("Error saving response")
+        console.log("Error saving reservation")
         res.json(error)
+        return error.res
     })
-})*/
+})
 
 router.get('/reservations', (req, res) => {
     reservationTemplate.find()
     .then(data => {
+        console.log('getting reservations in get endpoint')
         res.json(data)
     })
     .catch(error => {
@@ -112,9 +119,11 @@ router.get('/reservations', (req, res) => {
     })
 })
 
+/************************* TABLES ENDPOINT ***************************/
 router.get('/tables', (req, res) => {
     tableModel.find()
     .then(data => {
+        console.log('getting tables from get endpoint')
         res.json(data)
     })
     .catch(error => {
@@ -123,6 +132,5 @@ router.get('/tables', (req, res) => {
         return error.res
     })
 })
-
 
 export default router

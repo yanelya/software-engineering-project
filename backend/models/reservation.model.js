@@ -17,10 +17,6 @@ const reservationTemplate = new mongoose.Schema({
         type: String,
         required: true
     },
-    numOfguest:{
-        type: Number,
-        required: true
-    },
     date: {
         type: String,
         required: true
@@ -31,6 +27,10 @@ const reservationTemplate = new mongoose.Schema({
     },
     guests: {
         type: String,
+        required: true
+    },
+    table_number: {
+        type: Number,
         required: true
     }
 })
