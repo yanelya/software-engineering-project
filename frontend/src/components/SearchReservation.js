@@ -4,10 +4,21 @@ import "react-datepicker/dist/react-datepicker.css"
 import { displayTimes, reservationsEndpoint } from '../constantValues'
 import axios from 'axios'
 
+//-------------------- Get Request --------------------
+export const reservationsGetRequest = async () => {
+    try{
+        return await axios.get(reservationsEndpoint)
+    }
+    catch (error) {
+        console.log('Error getting reservation data:', error)
+        return []
+    }
+ }
+
 const SearchReservation = ({reservedTables, reservationReady, selectedReservation}) => {
     const [cdate, setDate] = useState(new Date())
     const [numOfguests, setNumOfguests] = useState('')
-    const [timeChosen, setTime] = useState('')
+    const [time, setTime] = useState('')
     const [isOpen, setIsOpen] = useState(false);  
     const [reservationData, setReservationData] = useState([])
     const dataFetchedRef = useRef(false)
@@ -28,25 +39,27 @@ const SearchReservation = ({reservedTables, reservationReady, selectedReservatio
         if (dataFetchedRef.current) 
             return;
         dataFetchedRef.current = true
-        reservationsGetRequest()
-    }) 
+        reservationsGetRequest().then(res => {
+            const resdata = res.data
+            setReservationData(resdata)
+        })
+    }, []) 
     
     const handleSubmit = (e) => {
         e.preventDefault()
         
-        if(!cdate || !numOfguests || !timeChosen){
+        if(!cdate || !numOfguests || !time){
             alert('Missing fields')
             return
         }
 
         //grabbing tables being occupied given date & time
         const reservationsForDateEntered = reservationData.filter(({date}) => date === cdate.toDateString())
-        //reservationsForDateEntered = reservationsForDateEntered.filter(({time}) => time === timeChosen)
         const reservedTablesForDate = reservationsForDateEntered.map((value) => value.table_number)
 
         const reservation = {
             date: cdate, 
-            time: timeChosen, 
+            time: time, 
             guests: numOfguests,
             table_number: ''
         }
