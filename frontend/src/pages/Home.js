@@ -16,7 +16,7 @@ const Home = () => {
     <div className="content"> 
         <h1>Welcome {userName}</h1>
         <p>Enjoy a luxurious evening with a one of a kind view only at our restaurant</p>
-        <p>We are open from 8:00 A.M. to 10:00 P.M.</p>
+        <p>We are open from 11:00 A.M. to 10:00 P.M.</p>
     </div>
   );
 }

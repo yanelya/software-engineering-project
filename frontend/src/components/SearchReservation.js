@@ -7,6 +7,7 @@ import axios from 'axios'
 //-------------------- Get Request --------------------
 export const reservationsGetRequest = async () => {
     try{
+        console.log(axios.get(reservationsEndpoint))
         return await axios.get(reservationsEndpoint)
     }
     catch (error) {
@@ -14,11 +15,12 @@ export const reservationsGetRequest = async () => {
         return []
     }
  }
+ 
 
 const SearchReservation = ({reservedTables, reservationReady, selectedReservation}) => {
     const [cdate, setDate] = useState(new Date())
     const [numOfguests, setNumOfguests] = useState('')
-    const [time, setTime] = useState('')
+    const [timeChosen, setTime] = useState('')
     const [isOpen, setIsOpen] = useState(false);  
     const [reservationData, setReservationData] = useState([])
     const dataFetchedRef = useRef(false)
@@ -28,27 +30,33 @@ const SearchReservation = ({reservedTables, reservationReady, selectedReservatio
         if (dataFetchedRef.current) 
             return;
         dataFetchedRef.current = true
-        reservationsGetRequest().then(res => {
+        reservationsGetRequest()
+        .then(res => {
             const resdata = res.data
             setReservationData(resdata)
         })
+        .catch(res => {
+            console.log('Error getting reservations')
+        })
+
     }, []) 
     
     const handleSubmit = (e) => {
         e.preventDefault()
         
-        if(!cdate || !numOfguests || !time){
+        if(!cdate || !numOfguests || !timeChosen){
             alert('Missing fields')
             return
         }
 
         //grabbing tables being occupied given date & time
         const reservationsForDateEntered = reservationData.filter(({date}) => date === cdate.toDateString())
+        //reservationsForDateEntered = reservationsForDateEntered.filter(({time}) => time === timeChosen)
         const reservedTablesForDate = reservationsForDateEntered.map((value) => value.table_number)
 
         const reservation = {
             date: cdate, 
-            time: time, 
+            time: timeChosen, 
             guests: numOfguests,
             table_number: ''
         }
