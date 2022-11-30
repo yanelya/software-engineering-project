@@ -1,14 +1,16 @@
 import axios from 'axios'
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { reservationsEndpoint } from '../constantValues'
 import { confirmAlert } from 'react-confirm-alert'
+import { useNavigate } from 'react-router-dom'
 
 const GuestForm = ({ reservationDetails }) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
+    const dataFetchedRef = useRef(false)
+    let navigate = useNavigate()
 
     function reservationPostRequest(reservation){
       axios.post(reservationsEndpoint, reservation)
@@ -16,6 +18,7 @@ const GuestForm = ({ reservationDetails }) => {
 
         confirmAlert({
           title: 'Reservation created!',
+          message: 'No show will have minimum $10 charge',
           buttons: [
             {
               label: 'Okay'
@@ -54,8 +57,6 @@ const GuestForm = ({ reservationDetails }) => {
         table_number: reservationDetails.table_number
       }
 
-      console.log(reservation)
-
       confirmAlert({
         title: 'Confirm reservation',
         buttons: [
@@ -70,6 +71,27 @@ const GuestForm = ({ reservationDetails }) => {
       })
 
     } 
+
+    useEffect(() => {
+      if (dataFetchedRef.current) 
+        return
+      dataFetchedRef.current = true
+      
+      confirmAlert({
+        title: 'Register?',
+        message: 'Register before making reservation?',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => {navigate('/Register')}
+          },
+          {
+            label: 'No'
+          }
+        ]
+      })
+      
+    })
 
   return (
     <form onSubmit={onSubmit}> 
@@ -93,7 +115,7 @@ const GuestForm = ({ reservationDetails }) => {
         <input type='email' required placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
       </div>
       
-      <input type='submit' value='Check avaliable tables' className='btn btn-block'/>
+      <input type='submit' value='Make reservation' className='btn btn-block'/>
     </form>
   )
 }
