@@ -14,33 +14,3 @@ const testData =
 test('canary test', () => {
     expect(true).toBe(true);
 });
-
-
-describe('reservationsGetRequest', () => {
-    it('Retrieved data from customers API', async () => {
-        axios.get.mockResolvedValueOnce(testData)
-        const result = await reservationsGetRequest()
-        expect(result).toEqual(testData)
-    });
-
-    it('reservationsEndpoint called', async () => {
-        axios.get.mockResolvedValueOnce(testData)
-        await reservationsGetRequest()
-        expect(axios.get).toHaveBeenCalledWith(reservationsEndpoint)
-    })
-});
-
-
-describe('tableGetRequest', () => {
-    it('Retrieved data from table API', async () => {
-        axios.get.mockResolvedValueOnce(testData)
-        const result = await tableGetRequest()
-        expect(result).toEqual(testData)
-    });
-
-    it('tableEndpoint called', async () => {
-        axios.get.mockResolvedValueOnce(testData)
-        await tableGetRequest()
-        expect(axios.get).toHaveBeenCalledWith(tableEndpoint)
-    })
-});

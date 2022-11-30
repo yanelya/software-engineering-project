@@ -4,22 +4,6 @@ import "react-datepicker/dist/react-datepicker.css"
 import { displayTimes, reservationsEndpoint } from '../constantValues'
 import axios from 'axios'
 
-<<<<<<< HEAD
-=======
-//-------------------- Get Request --------------------
-export const reservationsGetRequest = async () => {
-    try{
-        console.log(axios.get(reservationsEndpoint))
-        return await axios.get(reservationsEndpoint)
-    }
-    catch (error) {
-        console.log('Error getting reservation data:', error)
-        return []
-    }
- }
- 
-
->>>>>>> 9cffb660b6eb622ae3278de5b65acb174fd5f292
 const SearchReservation = ({reservedTables, reservationReady, selectedReservation}) => {
     const [cdate, setDate] = useState(new Date())
     const [numOfguests, setNumOfguests] = useState('')
@@ -45,19 +29,7 @@ const SearchReservation = ({reservedTables, reservationReady, selectedReservatio
             return;
         dataFetchedRef.current = true
         reservationsGetRequest()
-<<<<<<< HEAD
     }) 
-=======
-        .then(res => {
-            const resdata = res.data
-            setReservationData(resdata)
-        })
-        .catch(res => {
-            console.log('Error getting reservations')
-        })
-
-    }, []) 
->>>>>>> 9cffb660b6eb622ae3278de5b65acb174fd5f292
     
     const handleSubmit = (e) => {
         e.preventDefault()
