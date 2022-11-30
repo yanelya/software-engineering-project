@@ -3,29 +3,26 @@ import { useState, useEffect, useRef } from 'react'
 import { tableEndpoint } from '../constantValues'
 import axios from 'axios'
 
-export const tableGetRequest = async () => {
-    try{
-        return await axios.get(tableEndpoint)
-    }
-    catch (error) {
-        console.log('Error getting table data:', error)
-        return []
-    }
-}
-
 const TablesAvailable = ({occupantTables, reservationDetails, addTable, reservationReady, previousPage}) => {
     const [fullOccupancy, setFullOccupancy] = useState(false)
     const [availableTables, setAvailableTables] = useState([])
     const dataFetchedRef = useRef(false)
 
+    function tableGetRequest () {
+        axios.get(tableEndpoint, {})
+        .then(res => {
+            const resdata = res.data
+            checkAvailability(resdata)
+        })
+        .catch((error) =>
+            console.log('Error sending data:', error)
+    )}
+
     useEffect(() => {
         if (dataFetchedRef.current) 
             return;
         dataFetchedRef.current = true
-        tableGetRequest().then(res => {
-            const resdata = res.data
-            checkAvailability(resdata)
-        })
+        tableGetRequest()
     }) 
 
     function checkAvailability(resdata) {
