@@ -98,27 +98,27 @@ const RegisterForm = () => {
         <h1 className='center'>Register</h1>
         <div className='form-control'>
           <label>First Name</label>
-          <input type='text' required placeholder='First Name' value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+          <input id="FirstNameValidation" pattern="[a-z A-Z]{2,}" type='text' required placeholder='First Name' value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
         </div>
 
         <div className='form-control'>
           <label>Last Name</label>
-          <input type='text' required placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+          <input id = "LastNameValidation" pattern="[a-z A-Z]{2,}" type='text' required placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)}/>
         </div>
 
         <div className='form-control'>
           <label>Phone Number</label>
-          <input type='text' required placeholder='Phone Number' value={phone} onChange={(e) => setPhone(e.target.value)}/>
+          <input id="phone" type='tel' required pattern ="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="xxx-xxx-xxxx" value={phone} onChange={(e) => setPhone(e.target.value)}/>
         </div>
 
         <div className='form-control'>
           <label>Email</label>
-          <input type='email' required placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
+          <input id ="EmailValidation" title ="Must be a valid email" pattern="[a-zA-Z0-9._+-]+@[a-zA-Z0-9 -]+\.[a-z]{2,}" type='email' required placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
         </div>
 
         <div className='form-control'>
           <label>Address</label>
-          <input type='text' required placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)}/>
+          <input id="AddressValidation" type='text' required placeholder='123 Sugar Cup Ct' value={address} onChange={(e) => setAddress(e.target.value)}/>
         </div>
             
         <div className='center'>
@@ -147,10 +147,12 @@ const RegisterForm = () => {
 
         <div className='form-control'>
           <label>Password</label>
-          <input type='password' required placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+          <input id="pwd" title="Must contain at least 8 characters and have at least one uppercase and lowercase letter and at least one number" type="password" name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}/>
         </div>
 
+        <div>
         <input type='submit' value='Submit' className='btn btn-block'/>
+        </div>
       </form>
     </div>
   )

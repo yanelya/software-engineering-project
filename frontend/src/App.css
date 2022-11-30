@@ -232,6 +232,78 @@ input, button { /* Submit button in reservation */
   font-size: 17px;
 }
 
+#phone{
+  outline: 0;
+}
+
+#phone:valid{
+  border-color: rgb(125, 224, 125);
+}
+
+#phone:focus:invalid{
+  border-color: red;
+}
+
+#LastNameValidation{
+  outline: 0;
+}
+
+#LastNameValidation:valid{
+  border-color: rgb(125, 224, 125);
+}
+
+#LastNameValidation:focus:invalid{
+  border-color: red;
+}
+
+#FirstNameValidation{
+  outline: 0;
+}
+
+#FirstNameValidation:valid{
+  border-color: rgb(125, 224, 125);
+}
+
+#FirstNameValidation:focus:invalid{
+  border-color: red;
+}
+
+#EmailValidation{
+  outline: 0;
+}
+
+#EmailValidation:valid{
+  border-color: rgb(125, 224, 125);
+}
+
+#EmailValidation:focus:invalid{
+  border-color: red;
+}
+
+#AddressValidation{
+  outline: 0;
+}
+
+#AddressValidation:valid{
+  border-color: rgb(125, 224, 125);
+}
+
+#AddressValidation:focus:invalid{
+  border-color: red;
+}
+
+#pwd{
+  outline: 0;
+}
+
+#pwd:valid{
+  border-color: rgb(125, 224, 125);
+}
+
+#pwd:focus:invalid{
+  border-color: red;
+}
+
 /* UX */ 
 .prevent-select {
   -webkit-user-select: none; /* Safari */ 
