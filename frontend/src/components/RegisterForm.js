@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { customersEndpoint } from '../constantValues'
-import { confirmAlert } from 'react-confirm-alert'
-import 'react-confirm-alert/src/react-confirm-alert.css'
 
 const RegisterForm = () => {
   const [firstName, setFirstName] = useState('')
@@ -14,35 +12,6 @@ const RegisterForm = () => {
   const [billingAddress, setBillingAddress] = useState('')
   const [paymentMethod, setPaymentMethod] = useState('')
   const [password, setPassword] = useState('')
-
-  function registerPostRequest(registered) {
-    axios.post(customersEndpoint, registered)
-    .then(res =>{ 
-
-      confirmAlert({
-        title: 'Registered',
-        message: `Welcome ${firstName}!`,
-        buttons: [
-          {
-            label: 'Okay'
-          }
-        ]
-      })
-
-      setFirstName('')
-      setLastName('')
-      setPhone('')
-      setEmail('')
-      setAddress('')
-      setShowBilling(false)
-      setBillingAddress('')
-      setPaymentMethod('')
-      setPassword('')
-      })
-      
-    .catch((error) =>
-      console.log('Error sending data:', error))
-  }
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -67,27 +36,21 @@ const RegisterForm = () => {
       password: password
     }
 
-    confirmAlert({
-      title: 'Confirm to submit',
-      message: `Register with the following information? \n
-      First Name: ${firstName} 
-      Last Name: ${lastName} 
-      Phone Number: ${phone}
-      Email: ${email}
-      Mailing Address: ${address} ${showBilling ? `\nBilling Address: ${billingAddress}` : ''}
-      Payment Method: ${paymentMethod}
-      Password: ${password}
-      `,
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => registerPostRequest(registered)
-        },
-        {
-          label: 'No'
-        }
-      ]
-    })
+    axios.post(customersEndpoint, registered)
+    .then(res => 
+      console.log(res.data))
+    .catch((error) =>
+      console.log('Error sending data:', error))
+  
+    setFirstName('')
+    setLastName('')
+    setPhone('')
+    setEmail('')
+    setAddress('')
+    setShowBilling(false)
+    setBillingAddress('')
+    setPaymentMethod('')
+    setPassword('')
   }
 
   
