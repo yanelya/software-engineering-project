@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { reservationsEndpoint } from '../constantValues'
 import { confirmAlert } from 'react-confirm-alert'
 import { useNavigate } from 'react-router-dom'
+import { userDataEndpoint } from '../constantValues'
 
 const GuestForm = ({ reservationDetails }) => {
     const [firstName, setFirstName] = useState('')
@@ -11,6 +12,19 @@ const GuestForm = ({ reservationDetails }) => {
     const [email, setEmail] = useState('')
     const dataFetchedRef = useRef(false)
     let navigate = useNavigate()
+
+    const [isLoggedIn] = useState(window.localStorage.getItem("isLoggedIn"))
+
+    if(isLoggedIn){
+      axios.post(userDataEndpoint, {
+        token: window.localStorage.getItem("token")
+      }).then(res => {
+        setFirstName(res.data.data.first)
+        setLastName(res.data.data.last)
+        setPhone(res.data.data.phone)
+        setEmail(res.data.data.email)
+      }).catch((err) => {console.log(err.res)})
+    }
 
     function reservationPostRequest(reservation){
       axios.post(reservationsEndpoint, reservation)
