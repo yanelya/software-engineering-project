@@ -30,7 +30,7 @@ const reservationTemplate = new mongoose.Schema({
         required: true
     },
     table_number: {
-        type: Number,
+        type: Array,
         required: true
     }
 })
