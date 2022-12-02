@@ -5,6 +5,7 @@ import { tableGetRequest } from '../components/TablesAvailable.js'
 import { reservationsEndpoint, tableEndpoint } from '../constantValues.js'
 //import * as apiservice from '../components/TablesAvailable'
 
+
 const testData = 
 [
     { id: 1, name: "John" },
@@ -14,3 +15,5 @@ const testData =
 test('canary test', () => {
     expect(true).toBe(true);
 });
+
+export default Text;
