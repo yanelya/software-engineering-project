@@ -76,7 +76,6 @@ const RegisterForm = () => {
       Email: ${email}
       Mailing Address: ${address} ${showBilling ? `\nBilling Address: ${billingAddress}` : ''}
       Payment Method: ${paymentMethod}
-      Password: ${password}
       `,
       buttons: [
         {

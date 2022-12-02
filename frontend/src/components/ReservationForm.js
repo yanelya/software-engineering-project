@@ -4,18 +4,14 @@ import "react-datepicker/dist/react-datepicker.css"
 import ReservationButton from './ReservationButton'
 import SearchReservation from './SearchReservation'
 import MakeReservation from './MakeReservation'
-import TablesAvailable from './TablesAvailable'
 
 const ReservationForm = () => {
-
-
     const [reservation, setReservation] = useState({
         date: new Date(),
         time: '',
         guests: '',
-        table_number: ''
+        table_number: []
     })
-    const [occupantTables, setOccupantTables] = useState([])
     const [reserve, setReserve] = useState(false)
     const [dateChosen, setDateChosen] = useState(false)
     const [tableChosen, setTableChosen] = useState(false)
@@ -34,18 +30,9 @@ const ReservationForm = () => {
 
           {reserve && !dateChosen && !tableChosen &&
             <SearchReservation 
-            reservedTables={setOccupantTables} 
             reservationReady={setDateChosen} 
+            reservationReady2={setTableChosen} 
             selectedReservation={setReservation} />
-          }
-
-          {reserve && dateChosen && !tableChosen &&
-            <TablesAvailable 
-            occupantTables={occupantTables} 
-            reservationDetails={reservation}
-            addTable={setReservation}
-            reservationReady={setTableChosen} 
-            previousPage={setDateChosen}/>
           }
 
           {reserve && dateChosen && tableChosen && 

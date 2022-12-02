@@ -9,13 +9,13 @@ const MakeReservation = ({reservationDetails, reservationReady, reservationReady
     reservationReady2(false)
   }
 
+  console.log('tables: ', reservationDetails.table_number)
   return (
     <div>
         <div className='sub-container'>
             <p>Date: {reservationDetails.date.toDateString()}</p>
             <p>Time: {reservationDetails.time}</p>
             <p>Guests: {reservationDetails.guests}</p>
-            <p>Table Number: {reservationDetails.table_number}</p>
         </div>
 
         <div className='center'>
