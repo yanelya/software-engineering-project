@@ -4,6 +4,7 @@ import { reservationsEndpoint } from '../constantValues'
 import { confirmAlert } from 'react-confirm-alert'
 import { useNavigate } from 'react-router-dom'
 import { userDataEndpoint } from '../constantValues'
+import holidays from 'date-holidays'
 
 const GuestForm = ({ reservationDetails }) => {
     const [firstName, setFirstName] = useState('')
@@ -27,9 +28,12 @@ const GuestForm = ({ reservationDetails }) => {
     } 
 
     function reservationPostRequest(reservation){
+      const hd = new holidays('US')
+      hd.getHolidays(reservationDetails.date.getFullYear())
+
       axios.post(reservationsEndpoint, reservation)
       .then(res =>{ 
-        if(reservationDetails.date.getDay() === 5 || reservationDetails.date.getDay() === 6 || reservationDetails.date.getDay() === 7){
+        if(reservationDetails.date.getDay() === 5 || reservationDetails.date.getDay() === 6 || reservationDetails.date.getDay() === 7 || hd.isHoliday(reservationDetails.date)){
           confirmAlert({
             title: 'Reservation created!',
             message: 'No show will have minimum $10 charge',
@@ -40,11 +44,12 @@ const GuestForm = ({ reservationDetails }) => {
             ]
           })
         }
-        
+
         setFirstName('')
         setLastName('')
         setPhone('')
         setEmail('')
+        window.location.href = "/"
       })
         
       .catch((error) =>
