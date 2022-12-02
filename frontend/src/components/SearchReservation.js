@@ -101,7 +101,8 @@ const SearchReservation = ({reservationReady, reservationReady2, selectedReserva
 
         //grabbing tables being occupied given date & time
         const reservationsForDateEntered = reservationData.filter(({date, time}) => date === dateChosen.toDateString() && time === timeChosen)
-        const reservedTablesForDate = reservationsForDateEntered.map((value) => value.table_number)
+        let reservedTablesForDate = reservationsForDateEntered.map((value) => value.table_number)
+        reservedTablesForDate = [].concat(...reservedTablesForDate)
 
         const tables = checkAvailability(tableData, reservedTablesForDate)
 

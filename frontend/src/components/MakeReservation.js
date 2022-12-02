@@ -9,7 +9,8 @@ const MakeReservation = ({reservationDetails, reservationReady, reservationReady
     reservationReady2(false)
   }
 
-  console.log('tables: ', reservationDetails.table_number)
+  console.log('tables reserved: ', reservationDetails.table_number)
+
   return (
     <div>
         <div className='sub-container'>
