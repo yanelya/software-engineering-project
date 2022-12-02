@@ -7,8 +7,10 @@ import MakeReservation from './MakeReservation'
 import TablesAvailable from './TablesAvailable'
 
 const ReservationForm = () => {
+
+
     const [reservation, setReservation] = useState({
-        date: '',
+        date: new Date(),
         time: '',
         guests: '',
         table_number: ''

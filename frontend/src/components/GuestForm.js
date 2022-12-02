@@ -24,22 +24,23 @@ const GuestForm = ({ reservationDetails }) => {
         setPhone(res.data.data.phone)
         setEmail(res.data.data.email)
       }).catch((err) => {console.log(err.res)})
-    }
+    } 
 
     function reservationPostRequest(reservation){
       axios.post(reservationsEndpoint, reservation)
       .then(res =>{ 
-
-        confirmAlert({
-          title: 'Reservation created!',
-          message: 'No show will have minimum $10 charge',
-          buttons: [
-            {
-              label: 'Okay'
-            }
-          ]
-        })
-  
+        if(reservationDetails.date.getDay() === 5 || reservationDetails.date.getDay() === 6 || reservationDetails.date.getDay() === 7){
+          confirmAlert({
+            title: 'Reservation created!',
+            message: 'No show will have minimum $10 charge',
+            buttons: [
+              {
+                label: 'Okay'
+              }
+            ]
+          })
+        }
+        
         setFirstName('')
         setLastName('')
         setPhone('')
