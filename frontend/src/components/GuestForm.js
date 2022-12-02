@@ -49,7 +49,6 @@ const GuestForm = ({ reservationDetails }) => {
         setLastName('')
         setPhone('')
         setEmail('')
-        window.location.href = "/"
       })
         
       .catch((error) =>
