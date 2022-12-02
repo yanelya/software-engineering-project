@@ -55,19 +55,21 @@ const GuestForm = ({ reservationDetails }) => {
         return
       dataFetchedRef.current = true
       
-      confirmAlert({
-        title: 'Register?',
-        message: 'Register before making reservation?',
-        buttons: [
-          {
-            label: 'Yes',
-            onClick: () => {navigate('/Register')}
-          },
-          {
-            label: 'No'
-          }
-        ]
-      })
+      if(!isLoggedIn){
+        confirmAlert({
+          title: 'Register?',
+          message: 'Register before making reservation?',
+          buttons: [
+            {
+              label: 'Yes',
+              onClick: () => {navigate('/Register')}
+            },
+            {
+              label: 'No'
+            }
+          ]
+        })
+      }
     })
 
     const onSubmit = (e) => {
@@ -89,7 +91,7 @@ const GuestForm = ({ reservationDetails }) => {
         guests: reservationDetails.guests,
         table_number: reservationDetails.table_number
       }
-
+      
       confirmAlert({
         title: 'Confirm reservation',
         buttons: [
