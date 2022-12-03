@@ -1,5 +1,4 @@
 # software-engineering-project
+In order to run this project an .env file must be made containing the port # and login to the database in the backend:
 
-You need a .env file containing the port # & login to database in order to access the backend
-
-Some modules in frontend might need to be installed after cloning the
+You will also need to install the appropriate libraries to run the project using npm install
